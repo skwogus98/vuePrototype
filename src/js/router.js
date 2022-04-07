@@ -1,9 +1,9 @@
 import {createRouter, createWebHistory} from "vue-router";
 
-const Home = () => import('./components/Search.vue')
-const Login = () => import('./components/Login.vue')
-const signup = () => import('./components/SignUp.vue')
-const Board = () => import('./components/Board.vue')
+const Home = () => import('./views/Search.vue')
+const Login = () => import('./views/Login.vue')
+const signup = () => import('./views/SignUp.vue')
+const Board = () => import('./views/Board.vue')
 
 const routes = [
     {
