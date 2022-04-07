@@ -1,46 +1,43 @@
 <template>
   <div class="app">
-    
-    <!-- <menu-bar/>
-    <content-box/> -->
-<!--     <login/>
-    <sign-up/> -->
-    <Header style="display: none;"></Header>
+    <Header style="display: none"></Header>
     <div class="sidebar">
-      <Sidebar/>
+      <Sidebar />
     </div>
     <div class="content">
       <router-view></router-view>
     </div>
-    <Footer style="display:none;"></Footer>
+    <Footer style="display: none"></Footer>
   </div>
 </template>
 
 <script>
-import Header from './components/AppHeaderComp.vue'
-import Footer from './components/AppFooterComp.vue'
-import Sidebar from './components/AppSidebarComp.vue'
+import Header from "./components/AppHeaderComp.vue";
+import Footer from "./components/AppFooterComp.vue";
+import Sidebar from "./components/AppSidebarComp.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     /* MenuBar, ContentBox,  */
     /* Login, SignUp */
-    Header, Footer, Sidebar
+    Header,
+    Footer,
+    Sidebar,
   },
   data() {
     return {
-      loginState : false,
-      id : null
-    }
+      loginState: false,
+      id: null,
+    };
   },
   methods: {
-    asdf: function(){
-      this.loginState
-      typeof(this.loginState)
-    }
-  }
-}
+    asdf: function () {
+      this.loginState;
+      typeof this.loginState;
+    },
+  },
+};
 </script>
 
 <style>
@@ -52,11 +49,11 @@ export default {
   color: #2c3e50;
   background-color: rgb(190, 190, 190);
 }
-.content{
+.content {
   float: right;
   box-sizing: border-box;
 }
-.sidebar{
+.sidebar {
   width: 280px;
   float: left;
   box-sizing: border-box;
@@ -65,5 +62,4 @@ export default {
   width: 100%;
   height: 100%;
 }
-
 </style>
