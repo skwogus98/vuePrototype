@@ -1,10 +1,5 @@
 <template>
   <div class="app">
-    
-    <!-- <menu-bar/>
-    <content-box/> -->
-<!--     <login/>
-    <sign-up/> -->
     <Header style="display: none;"></Header>
     <div class="sidebar">
       <Sidebar/>
