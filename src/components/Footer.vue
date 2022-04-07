@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="footer">
     <div class="container">
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -21,19 +21,16 @@ export default {
 }
 </script>
 <style>
-.header{
+.footer{
     margin-bottom: 20px;
     height: 110px;
     padding: 30px;
     background: whitesmoke;
     vertical-align: middle;
 }
-.header img{
+.footer img{
     float: left;
     border-right: 100 solid black;
-}
-#login{
-    float: right;
 }
 </style>
 

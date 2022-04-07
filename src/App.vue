@@ -5,26 +5,28 @@
     <content-box/> -->
 <!--     <login/>
     <sign-up/> -->
-    <Header></Header>
-    <router-view></router-view>
+    <Header style="display: none;"></Header>
+    <div class="sidebar">
+      <Sidebar/>
+    </div>
+    <div class="content">
+      <router-view></router-view>
+    </div>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-//import MenuBar from './components/Menu.vue'
-//import ContentBox from './components/Content.vue'
-/* import Login from './components/Login.vue'
-import SignUp from './components/SignUp.vue' */
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import Sidebar from './components/Sidebar.vue'
 
 export default {
   name: 'App',
   components: {
     /* MenuBar, ContentBox,  */
     /* Login, SignUp */
-    Header, Footer
+    Header, Footer, Sidebar
   },
   data() {
     return {
@@ -50,4 +52,18 @@ export default {
   color: #2c3e50;
   background-color: rgb(190, 190, 190);
 }
+.content{
+  float: right;
+  box-sizing: border-box;
+}
+.sidebar{
+  width: 280px;
+  float: left;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="signUpBg">
     <img src="../assets/logo.png" width="100px">
-    <form class="signUp">
+    <form class="signUp" @submit="submitForm">
       <div class="inputBox">
         id
         <input type="text" v-model="id">
@@ -18,7 +18,7 @@
         age
         <input type="text" v-model="age">
       </div>
-      <b-button id="loginButton" @click="successLogin">
+      <b-button id="loginButton" type="submit">
         회원가입
       </b-button>
     </form>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 
 
 export default {
@@ -49,8 +49,20 @@ export default {
   },
   methods: {
     submitForm() {
-			alert(this.id + this.password + this.nickname + this.age)
-	},
+        //alert(this.id + this.password + this.nickname + this.age)
+        var url = '';
+        var signUpData = {
+          "user_id": this.id,
+          "user_pw": this.password,
+          "nickname": this.nickname,
+          "age": this.age,
+        }
+        axios.post(url, signUpData).then(function(res){
+          alert(res);
+        }).catch(function(err){
+          alert(err)
+        })
+    },
   },
 }
 </script>
