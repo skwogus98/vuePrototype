@@ -12,7 +12,7 @@
     <div class="content">
       <router-view></router-view>
     </div>
-    <Footer></Footer>
+    <Footer style="display:none;"></Footer>
   </div>
 </template>
 
