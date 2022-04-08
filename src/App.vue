@@ -1,69 +1,72 @@
 <template>
   <div class="app">
-    
-    <!-- <menu-bar/>
-    <content-box/> -->
-<!--     <login/>
-    <sign-up/> -->
-    <Header style="display: none;"></Header>
-    <div class="sidebar">
-      <Sidebar/>
+    <b-button id="sidebar-hide" @click="sidebarOn = !sidebarOn" v-if="sidebarOn">&lt;</b-button>
+    <b-button id="sidebar-show" @click="sidebarOn = !sidebarOn" v-else>&gt;</b-button>
+    <div class="sidebar" v-if="sidebarOn">
+      <AppSidebarComp/>
     </div>
-    <div class="content">
+    <div class="content" v-if="sidebarOn">
+      
       <router-view></router-view>
     </div>
-    <Footer style="display:none;"></Footer>
+    <div class="content-no-sidebar" v-else>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import Header from './components/AppHeaderComp.vue'
-import Footer from './components/AppFooterComp.vue'
-import Sidebar from './components/AppSidebarComp.vue'
+import AppSidebarComp from "./components/AppSidebarComp.vue";
+
+
 
 export default {
   name: 'App',
   components: {
-    /* MenuBar, ContentBox,  */
-    /* Login, SignUp */
-    Header, Footer, Sidebar
+    AppSidebarComp,
   },
   data() {
     return {
-      loginState : false,
-      id : null
+      sidebarOn : true
     }
   },
   methods: {
-    asdf: function(){
-      this.loginState
-      typeof(this.loginState)
-    }
   }
 }
 </script>
 
 <style>
-#app {
+.app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background-color: rgb(190, 190, 190);
-}
-.content{
-  float: right;
-  box-sizing: border-box;
+  margin-top: 0px;
 }
 .sidebar{
-  width: 280px;
-  float: left;
+  width: 320px;
   box-sizing: border-box;
   position: fixed;
   left: 0;
-  width: 100%;
   height: 100%;
+}
+.content{
+  margin-left: 320px;
+}
+.content-no-sidebar{
+  margin-left: 0px;
+}
+#sidebar-show{
+  position: fixed;
+  top: calc(50% - 20px);
+  left: 0px;
+}
+#sidebar-hide{
+  position: fixed;
+  top: calc(50% - 20px);
+  left: 320px;
 }
 
 </style>
