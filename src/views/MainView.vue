@@ -1,17 +1,12 @@
 <template>
   <div class="searchBg">
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    
+    <h1>메인화면</h1>
+    <img src="../assets/main.jpg" style="object-fit: cover" />
   </div>
 </template>
 
 <script>
-import searchResult from "../json/searchResult.json"
+import searchResult from "../json/searchResult.json";
 
 export default {
   name: "Search",
@@ -19,19 +14,17 @@ export default {
     return {
       searchResult: searchResult,
       searchFor: "" /* 검색 창 */,
-    }
+    };
   },
-  methods:{
-    search(){
-      alert(this.searchFor)
+  methods: {
+    search() {
+      alert(this.searchFor);
     },
-    goBoard(boardId){
-      boardId
-    }
-  }
-}
+    goBoard(boardId) {
+      boardId;
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -4,6 +4,7 @@ const MainView = () => import("../views/MainView.vue");
 const LoginView = () => import("../views/LoginView.vue");
 const RegisterView = () => import("../views/RegisterView.vue");
 const RoomListView = () => import("../views/RoomListView.vue");
+const CreateRoomView = () => import("../views/RoomListView.vue");
 const OrderListView = () => import("../views/OrderListView.vue");
 const ReportView = () => import("../views/ReportView.vue");
 
@@ -27,6 +28,10 @@ const routes = [
   {
     path: "/roomlist",
     component: RoomListView,
+  },
+  {
+    path: "/createroom",
+    component: CreateRoomView,
   },
   {
     path: "/orderlist",

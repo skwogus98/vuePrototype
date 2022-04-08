@@ -1,14 +1,16 @@
 <template>
-  <table>
-    <tr>
-      <td class="title"><slot name="roomTitle"></slot></td>
-      <td class="num-people">인원 <slot name="numPeople"></slot></td>
-    </tr>
-    <tr>
-      <td class="location">위치: <slot name="location"></slot></td>
-      <td class="num-price">금액: <slot name="price"></slot></td>
-    </tr>
-  </table>
+  <div>
+    <table>
+      <tr>
+        <td class="title"><slot name="roomTitle"></slot></td>
+        <td class="num-people">인원 <slot name="numPeople"></slot></td>
+      </tr>
+      <tr>
+        <td class="location">위치: <slot name="location"></slot></td>
+        <td class="num-price">금액: <slot name="price"></slot></td>
+      </tr>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -30,6 +32,9 @@ export default {
 </script>
 
 <style scoped>
+div {
+  padding-top: 10px;
+}
 table {
   margin-left: 15%;
   margin-right: 15%;
@@ -37,7 +42,6 @@ table {
   border: 1px solid;
   border-collapse: separate;
   border-radius: 20px;
-  margin-top: 20px;
   background: #55cc55;
 }
 table:nth-last-child(1) {
