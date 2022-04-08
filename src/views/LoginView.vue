@@ -18,7 +18,7 @@
 
     <div class="signIn">
       계정이 없으신가요?
-      <a href="/signup">가입하기</a>
+      <a href="/register">회원가입</a>
     </div>
   </div>
 </template>
@@ -36,7 +36,6 @@ export default {
   components: {},
   methods: {
     successLogin: function () {
-      this.$emit("close");
       //alert("hi")
     },
   },

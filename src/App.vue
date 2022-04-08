@@ -1,86 +1,72 @@
 <template>
   <div class="app">
-<<<<<<< HEAD
-    <Header style="display: none;"></Header>
-    <div class="sidebar">
-      <Sidebar/>
-=======
-    <AppHeaderComp style="display: none"></AppHeaderComp>
-    <div class="sidebar">
-      <AppSidebarComp />
->>>>>>> 7f9f7d4 (Refactoring)
+    <b-button id="sidebar-hide" @click="sidebarOn = !sidebarOn" v-if="sidebarOn">&lt;</b-button>
+    <b-button id="sidebar-show" @click="sidebarOn = !sidebarOn" v-else>&gt;</b-button>
+    <div class="sidebar" v-if="sidebarOn">
+      <AppSidebarComp/>
     </div>
-    <div class="content">
+    <div class="content" v-if="sidebarOn">
+      
       <router-view></router-view>
     </div>
-<<<<<<< HEAD
-    <Footer style="display:none;"></Footer>
-=======
-    <AppFooterComp style="display: none"></AppFooterComp>
->>>>>>> 7f9f7d4 (Refactoring)
+    <div class="content-no-sidebar" v-else>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-import Header from './components/AppHeaderComp.vue'
-import Footer from './components/AppFooterComp.vue'
-import Sidebar from './components/AppSidebarComp.vue'
-=======
-import AppHeaderComp from "./components/AppHeaderComp.vue";
-import AppFooterComp from "./components/AppFooterComp.vue";
 import AppSidebarComp from "./components/AppSidebarComp.vue";
->>>>>>> 7f9f7d4 (Refactoring)
+
+
 
 export default {
   name: 'App',
   components: {
-    /* MenuBar, ContentBox,  */
-    /* Login, SignUp */
-<<<<<<< HEAD
-    Header, Footer, Sidebar
-=======
-    AppHeaderComp,
-    AppFooterComp,
     AppSidebarComp,
->>>>>>> 7f9f7d4 (Refactoring)
   },
   data() {
     return {
-      loginState : false,
-      id : null
+      sidebarOn : true
     }
   },
   methods: {
-    asdf: function(){
-      this.loginState
-      typeof(this.loginState)
-    }
   }
 }
 </script>
 
 <style>
-#app {
+.app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background-color: rgb(190, 190, 190);
-}
-.content{
-  float: right;
-  box-sizing: border-box;
+  margin-top: 0px;
 }
 .sidebar{
-  width: 280px;
-  float: left;
+  width: 320px;
   box-sizing: border-box;
   position: fixed;
   left: 0;
-  width: 100%;
   height: 100%;
+}
+.content{
+  margin-left: 320px;
+}
+.content-no-sidebar{
+  margin-left: 0px;
+}
+#sidebar-show{
+  position: fixed;
+  top: calc(50% - 20px);
+  left: 0px;
+}
+#sidebar-hide{
+  position: fixed;
+  top: calc(50% - 20px);
+  left: 320px;
 }
 
 </style>
