@@ -1,27 +1,49 @@
 <template>
   <div class="app">
+<<<<<<< HEAD
     <Header style="display: none;"></Header>
     <div class="sidebar">
       <Sidebar/>
+=======
+    <AppHeaderComp style="display: none"></AppHeaderComp>
+    <div class="sidebar">
+      <AppSidebarComp />
+>>>>>>> 7f9f7d4 (Refactoring)
     </div>
     <div class="content">
       <router-view></router-view>
     </div>
+<<<<<<< HEAD
     <Footer style="display:none;"></Footer>
+=======
+    <AppFooterComp style="display: none"></AppFooterComp>
+>>>>>>> 7f9f7d4 (Refactoring)
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import Header from './components/AppHeaderComp.vue'
 import Footer from './components/AppFooterComp.vue'
 import Sidebar from './components/AppSidebarComp.vue'
+=======
+import AppHeaderComp from "./components/AppHeaderComp.vue";
+import AppFooterComp from "./components/AppFooterComp.vue";
+import AppSidebarComp from "./components/AppSidebarComp.vue";
+>>>>>>> 7f9f7d4 (Refactoring)
 
 export default {
   name: 'App',
   components: {
     /* MenuBar, ContentBox,  */
     /* Login, SignUp */
+<<<<<<< HEAD
     Header, Footer, Sidebar
+=======
+    AppHeaderComp,
+    AppFooterComp,
+    AppSidebarComp,
+>>>>>>> 7f9f7d4 (Refactoring)
   },
   data() {
     return {
