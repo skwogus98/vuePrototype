@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "title": "교촌 먹을 사람 구함",
+      "location": "금오공대 푸름1동",
+      "currentPerson": 2,
+      "maxPerson": 5,
+      "price": 25000,
+      "fundedPrice": 10000
+    },
+    {
+      "id": 2,
+      "title": "치즈볼 먹을 사람 구함",
+      "location": "금오공대 오름3동",
+      "currentPerson": 3,
+      "maxPerson": 5,
+      "price": 50000,
+      "fundedPrice": 20000
+    }
+  ]

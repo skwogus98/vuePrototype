@@ -1,18 +1,33 @@
 <template>
-  <div class="content">
-    <div v-for="temp in search" :key="temp">
-      {{ temp }}
-    </div>
+  <div :key="key" v-for="(room, key) in roomData">
+    <room-list-room-comp @click="enterRoom(room)">
+      <template #roomTitle> {{ room.title }}</template>
+      <template #numPeople>
+        {{ room.currentPerson }}/{{ room.maxPerson }}
+      </template>
+      <template #location> {{ room.location }} </template>
+      <template #price> {{ room.fundedPrice }}/{{ room.price }} </template>
+    </room-list-room-comp>
   </div>
 </template>
 
 <script>
+import RoomListRoomComp from "../components/RoomListRoomComp.vue";
+import roomList from "../json/roomList.json";
 export default {
   name: "RoomListView",
+  components: {
+    RoomListRoomComp,
+  },
   data() {
     return {
-      search: ["메뉴1", "메뉴2", "메뉴3"],
+      roomData: roomList,
     };
+  },
+  methods: {
+    enterRoom(room) {
+      alert(room.title);
+    },
   },
 };
 </script>
