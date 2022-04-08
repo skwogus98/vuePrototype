@@ -51,7 +51,7 @@ div {
   background-color: rgb(245, 245, 245);
   margin: auto;
   border-radius: 8px;
-  margin-top: 30px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 .login {

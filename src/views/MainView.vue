@@ -3,10 +3,6 @@
     asdfasdf<br><br><br><br><br><br>
     asdfasdf<br><br><br><br><br><br>
     asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    asdfasdf<br><br><br><br><br><br>
-    
   </div>
 </template>
 

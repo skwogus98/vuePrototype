@@ -1,6 +1,6 @@
 <template>
   <div :key="key" v-for="(room, key) in roomData">
-    <room-list-room-comp @click="enterRoom(room)">
+    <room-list-room-comp @click="$bvModal.show(room.id)">
       <template #roomTitle> {{ room.title }}</template>
       <template #numPeople>
         {{ room.currentPerson }}/{{ room.maxPerson }}
@@ -8,16 +8,20 @@
       <template #location> {{ room.location }} </template>
       <template #price> {{ room.fundedPrice }}/{{ room.price }} </template>
     </room-list-room-comp>
+    <room-list-detail-comp :roomId="room.id"/>
   </div>
 </template>
 
 <script>
+import RoomListDetailComp from '../components/RoomListDetailComp.vue';
 import RoomListRoomComp from "../components/RoomListRoomComp.vue";
 import roomList from "../json/roomList.json";
+
 export default {
   name: "RoomListView",
   components: {
     RoomListRoomComp,
+    RoomListDetailComp
   },
   data() {
     return {
