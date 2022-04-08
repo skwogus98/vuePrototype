@@ -35,7 +35,7 @@ import axios from 'axios'
 
 
 export default {
-  name: 'SignUp',
+  name: 'RegisterView',
   props: {},
   data() {
     return {

@@ -1,13 +1,15 @@
 <template>
-  <div class="content">
-    <router-view></router-view>
-  </div>
+  <app-header-comp></app-header-comp>
+  <router-view></router-view>
+  <app-footer-comp></app-footer-comp>
 </template>
 
 <script>
+import AppFooterComp from "./components/AppFooterComp.vue";
+import AppHeaderComp from "./components/AppHeaderComp.vue";
 export default {
   name: "App",
-  components: {},
+  components: { AppHeaderComp, AppFooterComp },
   data() {
     return {
       loginState: false,

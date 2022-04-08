@@ -18,7 +18,8 @@
 
     <div class="signIn">
       계정이 없으신가요?
-      <a href="/signup">가입하기</a>
+      <a href="/register">가입하기</a>
+      <b-button @click="$router.push('register')">가입하기</b-button>
     </div>
   </div>
 </template>
