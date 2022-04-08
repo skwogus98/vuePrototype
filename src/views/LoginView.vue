@@ -1,21 +1,19 @@
 <template>
   <div class="loginBg">
     <div class="img">
-      <img src="../assets/logo.png" width="100px">
+      <img src="../assets/logo.png" width="100px" />
     </div>
 
     <form class="login">
       <div class="inputBox">
         id
-        <input type="text" v-model="id"/>
+        <input type="text" v-model="id" />
       </div>
       <div class="inputBox">
         pw
-        <input type="password" v-model="password">
+        <input type="password" v-model="password" />
       </div>
-      <b-button id="loginButton" @click="successLogin">
-        로그인
-      </b-button>
+      <b-button id="loginButton" @click="successLogin"> 로그인 </b-button>
     </form>
 
     <div class="signIn">
@@ -23,39 +21,33 @@
       <a href="/signup">가입하기</a>
     </div>
   </div>
-  
 </template>
 
 <script>
-
-
-
 export default {
-  name: 'Login',
+  name: "LoginView",
   props: {},
   data() {
     return {
-      id: '',
-      password: ''
-    }
+      id: "",
+      password: "",
+    };
   },
-  components: {
-
-  },
+  components: {},
   methods: {
-    successLogin: function (){
-      this.$emit("close")
+    successLogin: function () {
+      this.$emit("close");
       //alert("hi")
-    }
+    },
   },
-}
+};
 </script>
 
 <style>
-div{
+div {
   box-sizing: border-box;
 }
-.loginBg{
+.loginBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
   margin: auto;
@@ -63,16 +55,16 @@ div{
   margin-top: 30px;
   margin-bottom: 30px;
 }
-.login{
+.login {
   text-align: left;
   width: 250px;
-  margin:0 auto;
+  margin: 0 auto;
   margin-top: 10px;
 }
-.inputBox{
+.inputBox {
   text-align: left;
   width: 100%;
-  margin:0 auto;
+  margin: 0 auto;
   background: rgba(223, 223, 223, 30%);
   border: rgba(80, 80, 80, 100%);
   border-radius: 6px;
@@ -80,16 +72,16 @@ div{
   margin-top: 10px;
   padding: 7px;
 }
-.inputBox input{
+.inputBox input {
   width: 100%;
   border: none;
   background: transparent;
 }
-#loginButton{
+#loginButton {
   width: 100%;
   margin-top: 15px;
 }
-.signIn{
+.signIn {
   padding: 20px;
   margin-top: 20px;
   border-top: solid rgb(190, 190, 190);

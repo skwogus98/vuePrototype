@@ -1,36 +1,46 @@
-import {createRouter, createWebHistory} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
-const Home = () => import('../views/SearchView.vue')
-const Login = () => import('../views/LoginView.vue')
-const signup = () => import('../views/SignUpView.vue')
-const Board = () => import('../views/BoardView.vue')
+const MainView = () => import("../views/MainView.vue");
+const LoginView = () => import("../views/LoginView.vue");
+const RegisterView = () => import("../views/RegisterView.vue");
+const RoomListView = () => import("../views/RoomListView.vue");
+const OrderListView = () => import("../views/OrderListView.vue");
+const ReportView = () => import("../views/ReportView.vue");
 
 const routes = [
-    {
-        Path: '/',
-        redirect: '/home'
-    },
-    {
-        path: '/home',
-        component: Home
-    },
-    {
-        path: '/login',
-        component: Login
-    },
-    {
-        path: '/signup',
-        component: signup
-    },
-    {
-        path: '/board/:id',
-        component: Board
-    },
-]
+  {
+    Path: "/",
+    redirect: "/main",
+  },
+  {
+    path: "/main",
+    component: MainView,
+  },
+  {
+    path: "/login",
+    component: LoginView,
+  },
+  {
+    path: "/register",
+    component: RegisterView,
+  },
+  {
+    path: "/roomlist",
+    component: RoomListView,
+  },
+  {
+    path: "/orderlist",
+    component: OrderListView,
+  },
+  {
+    path: "/report",
+    component: ReportView,
+  },
+];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes
-})
+  history: createWebHistory(),
+  routes,
+});
 
-export default router
+export default router;

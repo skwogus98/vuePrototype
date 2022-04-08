@@ -1,29 +1,29 @@
 <template>
   <div class="app">
-    <Header style="display: none"></Header>
+    <AppHeaderComp style="display: none"></AppHeaderComp>
     <div class="sidebar">
-      <Sidebar />
+      <AppSidebarComp />
     </div>
     <div class="content">
       <router-view></router-view>
     </div>
-    <Footer style="display: none"></Footer>
+    <AppFooterComp style="display: none"></AppFooterComp>
   </div>
 </template>
 
 <script>
-import Header from "./components/AppHeaderComp.vue";
-import Footer from "./components/AppFooterComp.vue";
-import Sidebar from "./components/AppSidebarComp.vue";
+import AppHeaderComp from "./components/AppHeaderComp.vue";
+import AppFooterComp from "./components/AppFooterComp.vue";
+import AppSidebarComp from "./components/AppSidebarComp.vue";
 
 export default {
   name: "App",
   components: {
     /* MenuBar, ContentBox,  */
     /* Login, SignUp */
-    Header,
-    Footer,
-    Sidebar,
+    AppHeaderComp,
+    AppFooterComp,
+    AppSidebarComp,
   },
   data() {
     return {
