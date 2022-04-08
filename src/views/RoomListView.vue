@@ -1,11 +1,15 @@
 <template>
   <div :key="key" v-for="(room, key) in roomData">
     <room-list-room-comp @click="enterRoom(room)">
-      <template #roomTitle> {{ room.title }}</template>
+      <template #roomTitle>
+        {{ room.title }}
+      </template>
       <template #numPeople>
         {{ room.currentPerson }}/{{ room.maxPerson }}
       </template>
-      <template #location> {{ room.location }} </template>
+      <template #location>
+        {{ room.location }}
+      </template>
       <template #price> {{ room.fundedPrice }}/{{ room.price }} </template>
     </room-list-room-comp>
   </div>
