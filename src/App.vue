@@ -5,11 +5,7 @@
     <div class="sidebar" v-if="sidebarOn">
       <AppSidebarComp/>
     </div>
-    <div class="content" v-if="sidebarOn">
-      
-      <router-view></router-view>
-    </div>
-    <div class="content-no-sidebar" v-else>
+    <div :class="[sidebarOn ? 'content': 'content-no-sidebar']">
       <router-view></router-view>
     </div>
   </div>
