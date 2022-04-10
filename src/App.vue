@@ -58,6 +58,7 @@ export default {
   height: 100%;
   padding: 100px;
   width: calc(100% - 320px);
+  overflow: auto
 }
 .content-no-sidebar{
   margin-left: 0px;
@@ -65,6 +66,7 @@ export default {
   height: 100%;
   padding: 100px;
   width: calc(100%);
+  overflow: auto
 }
 #sidebar-show{
   position: fixed;

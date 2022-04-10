@@ -1,5 +1,5 @@
 <template>
-    <b-modal :id="roomId" hide-footer size="xl" :title="roomDetail.title">
+    <b-modal id="roomDetailModal" hide-footer size="xl" :title="roomDetail.title">
       <div class="roomDetailLeft">
           <h3 style="margin-bottom: 30px">{{roomDetail.location}}</h3>
           <b-button>메뉴선택</b-button>
@@ -20,7 +20,7 @@
           </table>
       </div>
       <div class="orderButton">
-          <b-button>주문하기</b-button>
+          <b-button @click="order()">주문하기</b-button>
       </div>
     </b-modal>
 </template>
@@ -42,6 +42,9 @@ export default {
     enterRoom(room) {
       alert(room.title);
     },
+    order(){
+      alert(this.roomId)
+    }
   },
 };
 </script>

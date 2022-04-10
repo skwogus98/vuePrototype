@@ -1,6 +1,6 @@
 <template>
   <div :key="key" v-for="(room, key) in roomData">
-    <room-list-room-comp @click="$bvModal.show(room.id)">
+    <room-list-room-comp @click="enterRoom(room)">
       <template #roomTitle> {{ room.title }}</template>
       <template #numPeople>
         {{ room.currentPerson }}/{{ room.maxPerson }}
@@ -8,8 +8,8 @@
       <template #location> {{ room.location }} </template>
       <template #price> {{ room.fundedPrice }}/{{ room.price }} </template>
     </room-list-room-comp>
-    <room-list-detail-comp :roomId="room.id"/>
   </div>
+  <room-list-detail-comp :roomId="roomId"/>
 </template>
 
 <script>
@@ -26,11 +26,14 @@ export default {
   data() {
     return {
       roomData: roomList,
+      roomId: 0
     };
   },
   methods: {
     enterRoom(room) {
-      alert(room.title);
+      this.$bvModal.show('roomDetailModal')
+      this.roomId = room.Id
+      alert(this.room)
     },
   },
 };
