@@ -7,21 +7,35 @@
           type="email"
           v-model="registerData.email"
           placeholder="이메일을 입력해 주세요"
+          required
         />
       </div>
       <div class="inputBox">
         <b-form-input
           type="password"
+          id="password"
           v-model="registerData.password"
           placeholder="비밀번호를 입력해 주세요"
+          required
         />
+        <b-form-invalid-feedback :state="validPw">
+          비밀번호는 8글자 이상이여야 합니다.
+        </b-form-invalid-feedback>
+        <b-form-valid-feedback :state="validPw"/>
       </div>
       <div class="inputBox">
         <b-form-input
           type="password"
+          id="passwordCheck"
           v-model="passwordCheck"
           placeholder="비밀번호를 재입력해 주세요"
+          required
+          :state="checkPw"
         />
+        <b-form-invalid-feedback :state="checkPw">
+          비밀번호가 일치하지 않습니다,
+        </b-form-invalid-feedback>
+        <b-form-valid-feedback :state="checkPw"/>
       </div>
       <div class="inputBox">
         <b-form-input
@@ -31,6 +45,7 @@
           placeholder="휴대폰 번호를 입력해 주세요"
           pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}"
           @keyup="chkItemPhone"
+          required
         />
       </div>
       <div class="inputBox">
@@ -38,6 +53,7 @@
           type="text"
           v-model="phoneCheck"
           placeholder="인증번호를 입력해 주세요"
+          required
         />
       </div>
       <b-button id="loginButton" type="submit"> 회원가입 </b-button>
@@ -117,6 +133,14 @@ export default {
       document.getElementById("phone").value = phone;
     },
   },
+  computed:{
+    checkPw(){
+      return this.registerData.password == this.passwordCheck
+    },
+    validPw(){
+      return this.registerData.password.length > 7
+    }
+  }
 };
 </script>
 
