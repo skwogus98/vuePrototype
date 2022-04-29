@@ -46,7 +46,7 @@
         <b-form-invalid-feedback :state="validPw">
           비밀번호는 8글자 이상이여야 합니다.
         </b-form-invalid-feedback>
-        <b-form-valid-feedback :state="validPw"/>
+        <b-form-valid-feedback :state="validPw" />
       </div>
       <div class="inputBox">
         <b-form-input
@@ -60,7 +60,7 @@
         <b-form-invalid-feedback :state="checkPw">
           비밀번호가 일치하지 않습니다,
         </b-form-invalid-feedback>
-        <b-form-valid-feedback :state="checkPw"/>
+        <b-form-valid-feedback :state="checkPw" />
       </div>
       <div class="inputBox">
         <b-button id="something" variant="light">인증번호받기</b-button>
@@ -73,6 +73,7 @@
           @keyup="chkItemPhone"
           required
         />
+        <b-button @click="getPhoneCheck">인증 번호 발송</b-button>
       </div>
       <div class="inputBox">
         <b-form-input
@@ -113,9 +114,10 @@ export default {
         email: "",
         nickname: "",
         password: "",
-        phoneNum: null,
+        phoneNum: "",
       },
       passwordCheck: "",
+      passwordCheckData: "",
       phoneCheck: "",
       vailidEmail: false,
       vailidNickname: false,
@@ -124,9 +126,21 @@ export default {
   },
   components: {},
   methods: {
+    async getPhoneCheck() {
+      let url = "http://127.0.0.1:8081";
+      axios
+        .post(url + "/phonecheck", this.registerData.phoneNum, {
+          headers: { "Content-Type": `application/json` },
+        })
+        .then((res) => {
+          console.log("인증 번호 수신");
+          this.phoneCheckData = res.data;
+        });
+    },
+
     submitForm() {
       //alert(this.id + this.password + this.nickname + this.age)
-      var url = "http://202.31.200.215";
+      var url = "http://localhost:8080";
       // var signUpData = {
       //   user_email: this.user_email,
       //   user_pw: this.user_pw,
@@ -183,14 +197,14 @@ export default {
       //
     }
   },
-  computed:{
-    checkPw(){
-      return this.registerData.password == this.passwordCheck
+  computed: {
+    checkPw() {
+      return this.registerData.password == this.passwordCheck;
     },
-    validPw(){
-      return this.registerData.password.length > 7
-    }
-  }
+    validPw() {
+      return this.registerData.password.length > 7;
+    },
+  },
 };
 </script>
 
