@@ -37,7 +37,6 @@ table {
   border: 1px solid;
   border-collapse: separate;
   border-radius: 20px;
-  margin-top: 20px;
   background: #55cc55;
 }
 table:nth-last-child(1) {

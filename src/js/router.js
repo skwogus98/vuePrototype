@@ -6,6 +6,7 @@ const RegisterView = () => import("../views/RegisterView.vue");
 const RoomListView = () => import("../views/RoomListView.vue");
 const OrderListView = () => import("../views/OrderListView.vue");
 const ReportView = () => import("../views/ReportView.vue");
+const CreateRoomView = () => import("../views/CreateRoomView.vue");
 
 const routes = [
   {
@@ -27,6 +28,10 @@ const routes = [
   {
     path: "/roomlist",
     component: RoomListView,
+  },
+  {
+    path: "/createroom",
+    component: CreateRoomView,
   },
   {
     path: "/orderlist",

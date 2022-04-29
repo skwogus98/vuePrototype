@@ -5,11 +5,7 @@
     <div class="sidebar" v-if="sidebarOn">
       <AppSidebarComp/>
     </div>
-    <div class="content" v-if="sidebarOn">
-      
-      <router-view></router-view>
-    </div>
-    <div class="content-no-sidebar" v-else>
+    <div :class="[sidebarOn ? 'content': 'content-no-sidebar']">
       <router-view></router-view>
     </div>
   </div>
@@ -44,6 +40,9 @@ export default {
   color: #2c3e50;
   background-color: rgb(190, 190, 190);
   margin-top: 0px;
+  width: 100%;
+  height: 100%;
+  position:fixed;
 }
 .sidebar{
   width: 320px;
@@ -51,22 +50,35 @@ export default {
   position: fixed;
   left: 0;
   height: 100%;
+  z-index: 1;
 }
 .content{
   margin-left: 320px;
+  position: fixed;
+  height: 100%;
+  padding: 100px;
+  width: calc(100% - 320px);
+  overflow: auto
 }
 .content-no-sidebar{
   margin-left: 0px;
+  position: fixed;
+  height: 100%;
+  padding: 100px;
+  width: calc(100%);
+  overflow: auto
 }
 #sidebar-show{
   position: fixed;
   top: calc(50% - 20px);
   left: 0px;
+  z-index: 3;
 }
 #sidebar-hide{
   position: fixed;
   top: calc(50% - 20px);
   left: 320px;
+  z-index: 3;
 }
 
 </style>
