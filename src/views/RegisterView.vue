@@ -3,7 +3,9 @@
     <img src="../assets/logo.png" width="100px" />
     <b-form class="signUp" @submit="submitForm">
       <div class="inputBox">
-        <b-button id="checkEmailButton" variant="light" @click="checkEmail">중복 확인</b-button>
+        <b-button id="checkEmailButton" variant="light" @click="checkEmail"
+          >중복 확인</b-button
+        >
         <b-form-input
           type="email"
           v-model="registerData.email"
@@ -19,7 +21,12 @@
         </b-form-valid-feedback>
       </div>
       <div class="inputBox">
-        <b-button id="checkNicknameButton" variant="light" @click="checkNickname">중복 확인</b-button>
+        <b-button
+          id="checkNicknameButton"
+          variant="light"
+          @click="checkNickname"
+          >중복 확인</b-button
+        >
         <b-form-input
           type="text"
           v-model="registerData.nickname"
@@ -63,7 +70,9 @@
         <b-form-valid-feedback :state="checkPw" />
       </div>
       <div class="inputBox">
-        <b-button id="something" variant="light">인증번호받기</b-button>
+        <b-button id="something" variant="light" @click="getPhoneCheck"
+          >인증번호받기</b-button
+        >
         <b-form-input
           id="phone"
           type="tel"
@@ -73,7 +82,6 @@
           @keyup="chkItemPhone"
           required
         />
-        <b-button @click="getPhoneCheck">인증 번호 발송</b-button>
       </div>
       <div class="inputBox">
         <b-form-input
@@ -87,8 +95,8 @@
         id="checkbox-1"
         v-model="checkAccept"
         name="checkbox-1"
-        value=true
-        unchecked-value=false
+        value="true"
+        unchecked-value="false"
       >
         약관을 모두 읽고 동의하였습니다.
       </b-form-checkbox>
@@ -121,7 +129,7 @@ export default {
       phoneCheck: "",
       vailidEmail: false,
       vailidNickname: false,
-      checkAccept: false
+      checkAccept: false,
     };
   },
   components: {},
@@ -133,7 +141,7 @@ export default {
           headers: { "Content-Type": `application/json` },
         })
         .then((res) => {
-          console.log("인증 번호 수신");
+          alert(this.registerData.phoneNum + "으로 인증번호를 보냈습니다.");
           this.phoneCheckData = res.data;
         });
     },
@@ -184,18 +192,18 @@ export default {
       }
       document.getElementById("phone").value = phone;
     },
-    checkEmail(){
-      this.registerData.email
+    checkEmail() {
+      this.registerData.email;
       //Get method
-      this.vailidEmail = true
+      this.vailidEmail = true;
       //
     },
-    checkNickname(){
-      this.registerData.nickname
+    checkNickname() {
+      this.registerData.nickname;
       //Get method
-      this.vailidNickname = true
+      this.vailidNickname = true;
       //
-    }
+    },
   },
   computed: {
     checkPw() {
@@ -258,7 +266,6 @@ div {
   width: 27%;
   float: right;
   font-size: 0.75em;
-
 }
 .Login {
   padding: 20px;
@@ -266,7 +273,7 @@ div {
   border-top: solid rgb(190, 190, 190);
   border-width: 0.1px;
 }
-.form-check{
+.form-check {
   margin-top: 20px;
   margin-bottom: 20px;
 }
