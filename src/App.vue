@@ -6,6 +6,7 @@
       <AppSidebarComp/>
     </div>
     <div :class="[sidebarOn ? 'content': 'content-no-sidebar']">
+      <!-- 동적 클래스 전환 -->
       <router-view></router-view>
     </div>
   </div>

@@ -3,12 +3,36 @@
     <img src="../assets/logo.png" width="100px" />
     <b-form class="signUp" @submit="submitForm">
       <div class="inputBox">
+        <b-button id="checkEmailButton" variant="light" @click="checkEmail">중복 확인</b-button>
         <b-form-input
           type="email"
           v-model="registerData.email"
           placeholder="이메일을 입력해 주세요"
           required
+          :state="vailidEmail"
         />
+        <b-form-invalid-feedback :state="vailidEmail">
+          이미 사용중인 이메일 입니다.
+        </b-form-invalid-feedback>
+        <b-form-valid-feedback :state="vailidEmail">
+          사용 가능한 이메일 입니다.
+        </b-form-valid-feedback>
+      </div>
+      <div class="inputBox">
+        <b-button id="checkNicknameButton" variant="light" @click="checkNickname">중복 확인</b-button>
+        <b-form-input
+          type="text"
+          v-model="registerData.nickname"
+          placeholder="닉네임을 입력해 주세요"
+          required
+          :state="vailidNickname"
+        />
+        <b-form-invalid-feedback :state="vailidNickname">
+          이미 사용중인 닉네임 입니다.
+        </b-form-invalid-feedback>
+        <b-form-valid-feedback :state="vailidNickname">
+          사용가능한 닉네임 입니다.
+        </b-form-valid-feedback>
       </div>
       <div class="inputBox">
         <b-form-input
@@ -17,6 +41,7 @@
           v-model="registerData.password"
           placeholder="비밀번호를 입력해 주세요"
           required
+          :state="validPw"
         />
         <b-form-invalid-feedback :state="validPw">
           비밀번호는 8글자 이상이여야 합니다.
@@ -38,6 +63,7 @@
         <b-form-valid-feedback :state="checkPw"/>
       </div>
       <div class="inputBox">
+        <b-button id="something" variant="light">인증번호받기</b-button>
         <b-form-input
           id="phone"
           type="tel"
@@ -56,6 +82,15 @@
           required
         />
       </div>
+      <b-form-checkbox
+        id="checkbox-1"
+        v-model="checkAccept"
+        name="checkbox-1"
+        value=true
+        unchecked-value=false
+      >
+        약관을 모두 읽고 동의하였습니다.
+      </b-form-checkbox>
       <b-button id="loginButton" type="submit"> 회원가입 </b-button>
     </b-form>
 
@@ -82,6 +117,9 @@ export default {
       },
       passwordCheck: "",
       phoneCheck: "",
+      vailidEmail: false,
+      vailidNickname: false,
+      checkAccept: false
     };
   },
   components: {},
@@ -132,6 +170,18 @@ export default {
       }
       document.getElementById("phone").value = phone;
     },
+    checkEmail(){
+      this.registerData.email
+      //Get method
+      this.vailidEmail = true
+      //
+    },
+    checkNickname(){
+      this.registerData.nickname
+      //Get method
+      this.vailidNickname = true
+      //
+    }
   },
   computed:{
     checkPw(){
@@ -183,17 +233,27 @@ div {
   border-radius: 6px;
   border-width: 10px;
   margin-top: 10px;
-  padding: 7px;
+  padding: 1em;
 }
 .inputBox input {
-  width: 100%;
+  width: 70%;
   border: none;
   background: transparent;
+}
+.inputBox button {
+  width: 27%;
+  float: right;
+  font-size: 0.75em;
+
 }
 .Login {
   padding: 20px;
   margin-top: 20px;
   border-top: solid rgb(190, 190, 190);
   border-width: 0.1px;
+}
+.form-check{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
