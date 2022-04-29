@@ -1,27 +1,25 @@
 <template>
   <div class="signUpBg">
     <img src="../assets/logo.png" width="100px">
-    <form class="signUp" @submit="submitForm">
+    <b-form class="signUp" @submit="submitForm">
       <div class="inputBox">
-        id
-        <input type="text" v-model="id">
+        <b-form-input type="email" v-model="registerData.email" placeholder="이메일을 입력해 주세요"/>
       </div>
       <div class="inputBox">
-        password
-        <input type="password" v-model="password">
+        <b-form-input type="password" v-model="registerData.password" placeholder="비밀번호를 입력해 주세요"/>
       </div>
       <div class="inputBox">
-        nickname
-        <input type="text" v-model="nickname">
+        <b-form-input type="password" v-model="passwordCheck" placeholder="비밀번호를 재입력해 주세요"/>
       </div>
       <div class="inputBox">
-        age
-        <input type="text" v-model="age">
+        <b-form-input id="phone" type="tel" v-model="registerData.phoneNumber" placeholder="휴대폰 번호를 입력해 주세요" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" @keyup="chkItemPhone"/>
+      </div>
+      <div class="inputBox">
+        <b-form-input type="text" v-model="phoneCheck" placeholder="인증번호를 입력해 주세요"/>
       </div>
       <b-button id="loginButton" type="submit">
-        회원가입
       </b-button>
-    </form>
+    </b-form>
 
     <div class="Login">
       계정이 있으신가요?
@@ -39,10 +37,14 @@ export default {
   props: {},
   data() {
     return {
-        id: '',
-        password: '',
-        nickname: '',
-        age: '',
+        registerData:{
+          email: '',
+          nickname: '',
+          password: '',
+          phoneNumber: null,
+        },
+        passwordCheck:'',
+        phoneCheck:''
     }
   },
   components: {
@@ -63,6 +65,35 @@ export default {
           alert(err)
         })
     },
+    chkItemPhone() {
+      var temp = document.getElementById("phone").value
+      var number = temp.replace(/[^0-9]/g, "");
+      var phone = "";
+
+      if (number.length < 9) {
+        return number;
+      } else if (number.length < 10) {
+        phone += number.substr(0, 2);
+            phone += "-";
+            phone += number.substr(2, 3);
+        phone += "-";
+        phone += number.substr(5);
+      } else if (number.length < 11) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 3);
+        phone += "-";
+        phone += number.substr(6);
+      } else {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 4);
+        phone += "-";
+        phone += number.substr(7);
+      }
+      document.getElementById("phone").value = phone
+    },
+
   },
 }
 </script>
@@ -90,7 +121,7 @@ div{
 }
 .signUp{
   text-align: left;
-  width: 250px;
+  width: 400px;
   margin:0 auto;
 }
 #loginButton{

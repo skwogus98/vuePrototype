@@ -4,17 +4,17 @@
       <img src="../assets/logo.png" width="100px" />
     </div>
 
-    <form class="login">
+    <b-form class="login">
       <div class="inputBox">
         id
-        <input type="text" v-model="id" />
+        <b-form-input type="text" v-model="id" />
       </div>
       <div class="inputBox">
         pw
-        <input type="password" v-model="password" />
+        <b-form-input type="password" v-model="password" />
       </div>
       <b-button id="loginButton" @click="successLogin"> 로그인 </b-button>
-    </form>
+    </b-form>
 
     <div class="signIn">
       계정이 없으신가요?
