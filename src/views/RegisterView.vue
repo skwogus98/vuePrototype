@@ -203,6 +203,7 @@ export default {
     },
     checkNickname() {
       this.registerData.nickname;
+      //this.registerData.nickname;
       this.nicknameChecked = true;
       //Get method
       this.vailidNickname = true;
