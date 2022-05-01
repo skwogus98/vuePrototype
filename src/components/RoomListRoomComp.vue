@@ -1,13 +1,25 @@
 <template>
-  <table>
-    <tr>
-      <td class="title"><slot name="roomTitle"></slot></td>
-      <td class="num-people">인원 <slot name="numPeople"></slot></td>
-    </tr>
-    <tr>
-      <td class="location">위치: <slot name="location"></slot></td>
-      <td class="num-price">금액: <slot name="price"></slot></td>
-    </tr>
+  <table class="roomListTable">
+    <td>
+      <table>
+        <tr class="title">
+          <slot name="roomTitle"></slot>
+        </tr>
+      </table>
+      <table class="roomDetailTable">
+        <tr>
+        <table>
+          <td class="num-price">💰 <slot name="price"></slot></td>
+          <td class="location">🚩 <slot name="location"></slot></td>
+        </table>
+      </tr>
+      </table>
+    </td>
+    <td id="showMapTd">
+      <b-button variant="outline-info">
+        🗺️
+      </b-button>
+    </td>
   </table>
 </template>
 
@@ -30,31 +42,52 @@ export default {
 </script>
 
 <style scoped>
-table {
-  margin-left: 15%;
-  margin-right: 15%;
-  width: 70%;
-  border: 1px solid;
+.roomListTable{
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(180,180,180);
   border-collapse: separate;
-  border-radius: 20px;
-  background: #55cc55;
+  border-radius: 8px;
+  background-color: rgb(245, 245, 245);
+  padding-top: 1.1em;
+  padding-bottom: 1.1em;
+  vertical-align: middle;
 }
-table:nth-last-child(1) {
-  margin-bottom: 20px;
+.roomListTable:nth-last-child(1) {
+  margin-bottom: 0.5em;
 }
 td {
-  padding: 10px;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
 }
 .title {
   text-align: left;
+  font-size: 2.7em;
 }
 .num-people {
   text-align: right;
 }
 .location {
-  text-align: left;
+  text-align: right;
 }
 .num-price {
-  text-align: right;
+  text-align: left;
+}
+#showMapTd{
+  border-left: 1px solid #444444;
+  width: 15%;
+  padding: 10px;
+}
+#showMapTd button{
+  height: 100%;
+  width: 2em;
+  font-size: 4em;
+}
+table{
+  width: 100%;
+  border: 0px;
+}
+.roomDetailTable{
+  margin-top: 0.8em;
 }
 </style>

@@ -26,14 +26,14 @@ export default {
   data() {
     return {
       roomData: roomList,
-      roomId: 0
+      roomId: null
     };
   },
   methods: {
     enterRoom(room) {
       this.$bvModal.show('roomDetailModal')
       this.roomId = room.Id
-      alert(this.room)
+      alert(this.roomId)
     },
   },
 };
