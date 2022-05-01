@@ -15,8 +15,6 @@
 <script>
 import AppSidebarComp from "./components/AppSidebarComp.vue";
 
-
-
 export default {
   name: 'App',
   components: {

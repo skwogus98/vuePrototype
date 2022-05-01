@@ -8,20 +8,39 @@
           @click="$router.push('main')"
         />
       </div>
+      <!-- 공통적으로 보여진 버튼 -->
       <div class="roomlistButton">
         <b-button @click="goRoomList">방 찾기</b-button>
       </div>
-      <div class="roomlistButton" v-if="!isLogin">
-        <b-button @click="$router.push('createroom')">방 만들기</b-button>
+      <!-- 로그인을 했을 때 보여지는 버튼 -->
+      <div v-if="isLogin">
+        <div class="roomlistButton">
+          <b-button @click="$router.push('createroom')">방 만들기</b-button>
+        </div>
+        <div class="sidebarFooter">
+          <div class="roomlistButton">
+            <b-button>마이 페이지</b-button>
+          </div>
+          <div class="roomlistButton">
+            <b-button>캐시 충전</b-button>
+          </div>
+          <div class="roomlistButton">
+            <b-button>로그아웃</b-button>
+          </div>
+          <div class="sidebarInfo"><h3>phone 010-5044-5388</h3></div>
+        </div>
       </div>
-      <div class="sidebarFooter">
-        <div class="roomlistButton" v-if="isLogin">
-          <b-button @click="$router.push('login')">로그인</b-button>
+      <!-- 로그인을 안했을 때 보여지는 버튼 -->
+      <div v-else>
+        <div class="sidebarFooter">
+          <div class="roomlistButton">
+            <b-button @click="$router.push('login')">로그인</b-button>
+          </div>
+          <div class="roomlistButton">
+            <b-button @click="$router.push('register')">회원가입</b-button>
+          </div>
+          <div class="sidebarInfo"><h3>phone 010-5044-5388</h3></div>
         </div>
-        <div class="roomlistButton" v-if="isLogin">
-          <b-button @click="$router.push('register')">회원가입</b-button>
-        </div>
-        <div class="sidebarInfo"><h3>phone 010-5044-5388</h3></div>
       </div>
     </b-sidebar>
   </div>
