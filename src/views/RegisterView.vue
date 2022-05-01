@@ -125,8 +125,8 @@ export default {
         phoneNum: "",
       },
       passwordCheck: "",
-      passwordCheckData: "",
       phoneCheck: "",
+      phoneCheckData: "",
       vailidEmail: false,
       vailidNickname: false,
       checkAccept: false,
@@ -134,6 +134,7 @@ export default {
   },
   components: {},
   methods: {
+    // 폰 인증번호 받기
     async getPhoneCheck() {
       let url = "http://127.0.0.1:8081";
       axios
@@ -145,24 +146,37 @@ export default {
           this.phoneCheckData = res.data;
         });
     },
+
+    // post /user 가입
     submitForm() {
       //alert(this.id + this.password + this.nickname + this.age)
-      var url = "http://localhost:8080";
-      // var signUpData = {
-      //   user_email: this.user_email,
-      //   user_pw: this.user_pw,
-      //   user_nickname: this.user_nickname,
-      //   user_phoneNum: this.user_phoneNum,
-      // };
+      let url = "http://localhost:8080";
+      let signUpData = {
+        user_email: this.user_email,
+        user_pw: this.user_pw,
+        user_nickname: this.user_nickname,
+        user_phoneNumber: this.user_phoneNum,
+      };
       axios
-        .post(url + "/user", this.registerData)
+        .post(url + "/user", signUpData, {
+          headers: { "Content-Type": `application/json` },
+        })
         .then(function (res) {
-          alert(res);
+          alert(res.status, res.body);
+          // // 정상적으로 회원가입이 됐을 때
+          // if(res.status == 200){
+
+          // }
+          // // 아닐 때
+          // else{
+
+          // }
         })
         .catch(function (err) {
           alert(err);
         });
     },
+
     chkItemPhone() {
       var temp = document.getElementById("phone").value;
       var number = temp.replace(/[^0-9]/g, "");

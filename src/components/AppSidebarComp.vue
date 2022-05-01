@@ -13,7 +13,7 @@
         <b-button @click="goRoomList">방 찾기</b-button>
       </div>
       <!-- 로그인을 했을 때 보여지는 버튼 -->
-      <div v-if="isLogin">
+      <div>
         <div class="roomlistButton">
           <b-button @click="$router.push('createroom')">방 만들기</b-button>
         </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <!-- 로그인을 안했을 때 보여지는 버튼 -->
-      <div v-else>
+      <div>
         <div class="sidebarFooter">
           <div class="roomlistButton">
             <b-button @click="$router.push('login')">로그인</b-button>
