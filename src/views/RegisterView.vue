@@ -152,17 +152,17 @@ export default {
       //alert(this.id + this.password + this.nickname + this.age)
       let url = "http://localhost:8080";
       let signUpData = {
-        user_email: this.user_email,
-        user_pw: this.user_pw,
-        user_nickname: this.user_nickname,
-        user_phoneNumber: this.user_phoneNum,
+        user_email: this.registerData.email,
+        user_pw: this.registerData.password,
+        user_nickname: this.registerData.nickname,
+        user_phoneNumber: this.registerData.phoneNum,
       };
       axios
         .post(url + "/user", signUpData, {
           headers: { "Content-Type": `application/json` },
         })
         .then(function (res) {
-          alert(res.status, res.body);
+          alert(res.data);
           // // 정상적으로 회원가입이 됐을 때
           // if(res.status == 200){
 
