@@ -7,6 +7,7 @@ const RoomListView = () => import("../views/RoomListView.vue");
 const OrderListView = () => import("../views/OrderListView.vue");
 const ReportView = () => import("../views/ReportView.vue");
 const CreateRoomView = () => import("../views/CreateRoomView.vue");
+const TestView = () => import("../views/TestView.vue");
 
 const routes = [
   {
@@ -40,6 +41,10 @@ const routes = [
   {
     path: "/report",
     component: ReportView,
+  },
+  {
+    path: "/test",
+    component: TestView,
   },
 ];
 

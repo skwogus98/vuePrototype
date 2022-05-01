@@ -35,6 +35,9 @@ export default {
   },
   components: {},
   methods: {
+    // 로그인이 성공하면 store에 loginUser 객체의 내용을 채움
+    // userId와 cash로 구성됨
+    // 성공하면, 사이드바의 방 만들기와 마이페이지, 캐시충전 등의 버튼을 보이게 함
     successLogin: function () {
       //alert("hi")
     },

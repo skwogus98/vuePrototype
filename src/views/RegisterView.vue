@@ -145,7 +145,6 @@ export default {
           this.phoneCheckData = res.data;
         });
     },
-
     submitForm() {
       //alert(this.id + this.password + this.nickname + this.age)
       var url = "http://localhost:8080";
