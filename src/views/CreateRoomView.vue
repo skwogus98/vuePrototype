@@ -4,9 +4,9 @@
             <b-form-input id="title" placeholder="제목을 입력해 주세요." v-model="RoomData.title"></b-form-input>
             <b-form-group class="roomDetailForm">
                 <b-form-input id="place" placeholder="분배장소" v-model="RoomData.place"></b-form-input>
-                <b-button>찾기</b-button>
+                <b-button>🔍</b-button>
                 <b-form-input id="restaurant" placeholder="음식점" v-model="RoomData.restaurant"></b-form-input>
-                <b-button>찾기</b-button>
+                <b-button>🔍</b-button>
                 <b-form-input id="money" placeholder="금액" type="number" v-model="RoomData.money"></b-form-input>
                 <b-form-input id="person" placeholder="인원 수" type="number" v-model="RoomData.person"></b-form-input>
             </b-form-group>
@@ -44,7 +44,7 @@ export default {
 
 <style>
 .createRoomBg{
-    width: 768px;
+    width: 100%;
     background-color: rgb(245, 245, 245);
     margin: auto;
     border-radius: 13px;
@@ -59,13 +59,14 @@ export default {
     margin-bottom: 30px;
 }
 .roomDetailForm input{
-    width: 90%;
+    width: calc(100% - 3.8em);
     float: left;
 }
 .roomDetailForm button{
-    width: calc(10%-10px);
+    width: 3em;
     float: right;
-    margin-left: 10px;
+    margin-left: 0.8em;
+    text-align: center;
 }
 
 .createRoomBg.submitButton button{
