@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "교촌 먹을 사람 구함",
+    "title": "치킨 먹을 사람 구함",
     "location": "금오공대 푸름1동",
     "currentPerson": 2,
     "maxPerson": 5,
@@ -16,5 +16,32 @@
     "maxPerson": 5,
     "price": 50000,
     "fundedPrice": 20000
+  },
+  {
+    "id": 1,
+    "title": "떡볶이 드실 분",
+    "location": "금오공대 푸름2동",
+    "currentPerson": 2,
+    "maxPerson": 5,
+    "price": 30000,
+    "fundedPrice": 7000
+  },
+  {
+    "id": 2,
+    "title": "중국집 시키실 분 계신가요",
+    "location": "금오공대 오름1동",
+    "currentPerson": 3,
+    "maxPerson": 5,
+    "price": 20000,
+    "fundedPrice": 15000
+  },
+  {
+    "id": 1,
+    "title": "커피",
+    "location": "금오공대 푸름1동",
+    "currentPerson": 2,
+    "maxPerson": 5,
+    "price": 25000,
+    "fundedPrice": 10000
   }
 ]
