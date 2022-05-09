@@ -27,7 +27,7 @@
 
 <script>
 import roomDetail from "../json/roomDetail.json"
-
+import axios from 'axios'
 export default {
   name: "RoomListDetailComp",
   props:['roomId'],
@@ -43,7 +43,18 @@ export default {
       alert(room.title);
     },
     order(){
-      alert(this.roomId)
+      let data = {
+        money: "5000",
+        id: 1
+      }
+      axios.post("http://202.31.200.215:8080/kakaoPay", data)
+      .then((res)=>{
+        alert(res.data)
+        window.location.replace(res.data);
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
   },
 };
