@@ -13,7 +13,7 @@
         pw
         <b-form-input type="password" v-model="password" />
       </div>
-      <b-button id="loginButton" @click="successLogin"> 로그인 </b-button>
+      <b-button id="loginButton" @click="login"> 로그인 </b-button>
     </b-form>
 
     <div class="signIn">
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "LoginView",
   props: {},
@@ -35,8 +37,25 @@ export default {
   },
   components: {},
   methods: {
-    successLogin: function () {
-      //alert("hi")
+    // 로그인이 성공하면 store에 loginUser 객체의 내용을 채움
+    // userId와 cash로 구성됨
+    // 성공하면, 사이드바의 방 만들기와 마이페이지, 캐시충전 등의 버튼을 보이게 함
+    login() {
+      axios
+        .post(
+          this.hostUrl,
+          {
+            user_email: this.id,
+            user_pw: this.password,
+          },
+          {
+            headers: { "Content-Type": `application/json` },
+          }
+        )
+        .then((res) => {
+          alert("로그인 시도");
+          console.log(res);
+        });
     },
   },
 };

@@ -125,8 +125,8 @@ export default {
         phoneNum: "",
       },
       passwordCheck: "",
-      passwordCheckData: "",
       phoneCheck: "",
+      phoneCheckData: "",
       vailidEmail: false,
       vailidNickname: false,
       checkAccept: false,
@@ -134,10 +134,11 @@ export default {
   },
   components: {},
   methods: {
-    async getPhoneCheck() {
-      let url = "http://127.0.0.1:8081";
+    // 폰 인증번호 받기
+    getPhoneCheck() {
+      // let url = "http://127.0.0.1:8081";
       axios
-        .post(url + "/phonecheck", this.registerData.phoneNum, {
+        .post(this.hostUrl + "/phonecheck", this.registerData.phoneNum, {
           headers: { "Content-Type": `application/json` },
         })
         .then((res) => {
@@ -146,24 +147,62 @@ export default {
         });
     },
 
+    // 이메일 중복 확인
+    checkEmail() {
+      axios
+        .post(this.hostUrl + "/user", this.registerData.email, {
+          headers: { "Content-Type": `application/json` },
+        })
+        // 중복이 아니라면, 사용해도 된다고 알림
+        .then((res) => {
+          alert(res);
+          this.vailidEmail = true;
+        });
+    },
+
+    // 닉네임 중복 확인
+    checkNickname() {
+      axios
+        .get(this.hostUrl + "/user/" + this.registerData.nickname, {
+          headers: { "Content-Type": `application/json` },
+        })
+        // 중복이 아니라면, 사용해도 된다고 알림
+        .then((res) => {
+          console.log(res.data);
+          this.vailidNickname = true;
+        });
+    },
+
+    // post /user 가입
     submitForm() {
       //alert(this.id + this.password + this.nickname + this.age)
-      var url = "http://localhost:8080";
-      // var signUpData = {
-      //   user_email: this.user_email,
-      //   user_pw: this.user_pw,
-      //   user_nickname: this.user_nickname,
-      //   user_phoneNum: this.user_phoneNum,
-      // };
+      // let url = "http://localhost:8080";
+      let signUpData = {
+        user_email: this.user_email,
+        user_pw: this.user_pw,
+        user_nickname: this.user_nickname,
+        user_phoneNumber: this.user_phoneNum,
+      };
       axios
-        .post(url + "/user", this.registerData)
+        .post(this.hostUrl + "/user", signUpData, {
+          headers: { "Content-Type": `application/json` },
+        })
         .then(function (res) {
-          alert(res);
+          alert(res.status, res.body);
+          // // 정상적으로 회원가입이 됐을 때
+          // if(res.status == 200){
+
+          // }
+          // // 아닐 때
+          // else{
+
+          // }
         })
         .catch(function (err) {
           alert(err);
         });
     },
+
     chkItemPhone() {
       var temp = document.getElementById("phone").value;
       var number = temp.replace(/[^0-9]/g, "");
@@ -191,18 +230,6 @@ export default {
         phone += number.substr(7);
       }
       document.getElementById("phone").value = phone;
-    },
-    checkEmail() {
-      this.registerData.email;
-      //Get method
-      this.vailidEmail = true;
-      //
-    },
-    checkNickname() {
-      this.registerData.nickname;
-      //Get method
-      this.vailidNickname = true;
-      //
     },
   },
   computed: {

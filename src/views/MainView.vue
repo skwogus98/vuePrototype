@@ -1,17 +1,15 @@
 <template>
   <div class="searchBg">
-    <div id="map" style="width:500px;height:400px;">
-    </div>
-
+    <div id="map" style="width: 500px; height: 400px"></div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Search",
   data() {
-    return { //https://codesandbox.io/s/nervous-keldysh-87yxg?file=/src/components/KakaoMap.vue:546-3501
+    return {
+      //https://codesandbox.io/s/nervous-keldysh-87yxg?file=/src/components/KakaoMap.vue:546-3501
       markerPositions1: [
         [33.452278, 126.567803],
         [33.452671, 126.574792],
@@ -107,9 +105,7 @@ export default {
       this.map.setCenter(iwPosition);
     },
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
