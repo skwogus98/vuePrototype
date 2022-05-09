@@ -2,7 +2,7 @@
     <b-modal id="roomDetailModal" hide-footer size="xl" :title="roomDetail.title">
       <div class="roomDetailLeft">
           <h3 style="margin-bottom: 30px">{{roomDetail.location}}</h3>
-          <b-button>메뉴선택</b-button>
+          <b-button id="menuSelect" @click="openMenu">메뉴선택</b-button>
           <h3 style="margin-top: 30px">주문 금액: 0원</h3>
       </div>
       <div class="roomDetailRight">
@@ -22,16 +22,19 @@
       <div class="orderButton">
           <b-button @click="order()">주문하기</b-button>
       </div>
+      <room-list-menu-comp-vue></room-list-menu-comp-vue>
     </b-modal>
 </template>
 
 <script>
 import roomDetail from "../json/roomDetail.json"
+import RoomListMenuCompVue from "./RoomListMenuComp.vue";
 
 export default {
   name: "RoomListDetailComp",
   props:['roomId'],
   components: {
+    RoomListMenuCompVue
   },
   data() {
     return {
@@ -44,6 +47,9 @@ export default {
     },
     order(){
       alert(this.roomId)
+    },
+    openMenu(){
+      this.$bvModal.show("MenuModal")
     }
   },
 };
@@ -72,5 +78,9 @@ export default {
 }
 #userName{
     width: 95%;
+}
+#menuSelect{
+
+  margin-bottom: 20%;
 }
 </style>
