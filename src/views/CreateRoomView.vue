@@ -52,6 +52,9 @@ export default {
     margin-bottom: 30px;
     padding: 40px;
 }
+.createRoomBg *{
+    font-size: 1.5rem;
+}
 .createRoomBg input{
     margin-bottom: 10px;
 }
