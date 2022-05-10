@@ -12,6 +12,7 @@
       <div class="roomlistButton">
         <b-button @click="goRoomList">방 찾기</b-button>
       </div>
+
       <!-- 로그인을 했을 때 보여지는 버튼 -->
       <div>
         <div class="roomlistButton">
@@ -33,11 +34,17 @@
       <!-- 로그인을 안했을 때 보여지는 버튼 -->
       <div>
         <div class="sidebarFooter">
-          <div class="roomlistButton">
+          <!-- <div class="roomlistButton">
             <b-button @click="$router.push('login')">로그인</b-button>
           </div>
           <div class="roomlistButton">
             <b-button @click="$router.push('register')">회원가입</b-button>
+          </div> -->
+          <div class="roomlistButton">
+            <b-button @click="$router.push('register')">마이 페이지</b-button>
+          </div>
+          <div class="roomlistButton">
+            <b-button @click="$router.push('cash')">캐시충전</b-button>
           </div>
           <div class="sidebarInfo"><h3>phone 010-5044-5388</h3></div>
         </div>

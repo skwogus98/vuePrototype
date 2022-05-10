@@ -7,6 +7,8 @@ const RoomListView = () => import("../views/RoomListView.vue");
 const OrderListView = () => import("../views/OrderListView.vue");
 const ReportView = () => import("../views/ReportView.vue");
 const CreateRoomView = () => import("../views/CreateRoomView.vue");
+const CashView = () => import("../views/CashView.vue");
+const KakaoPaySuccessView = () => import("../views/KakaoPaySuccessView.vue");
 const TestView = () => import("../views/TestView.vue");
 
 const routes = [
@@ -41,6 +43,14 @@ const routes = [
   {
     path: "/report",
     component: ReportView,
+  },
+  {
+    path: "/cash",
+    component: CashView,
+  },
+  {
+    path: "/kakaoPaySuccess",
+    component: KakaoPaySuccessView,
   },
   {
     path: "/test",
