@@ -4,21 +4,20 @@
   header-bg-variant="secondary">
     <div class="MenuContainer">
       <b-list-group>
-          <b-list-group-item variant="dark">주문 메뉴</b-list-group-item>
-          <b-list-group-item variant="light" :key="key" v-for="(menu, key) in selectedMenu">
-            <b-form-select v-model="selectedMenu[key].category" :options="categorySelect" id="category"></b-form-select>
-            <b-form-select v-model="selectedMenu[key].menuName" :options="menuNameSelect[selectedMenu[key].category]" id="category"></b-form-select>
-            <b-form-input v-if="selectedMenu[key].menuName=='custom'" id="customMenuInput"></b-form-input>
-            <b-form-input type="number" id="menuCount" placeholder="개수"></b-form-input>
-
-          </b-list-group-item>
-          <b-list-group-item variant="light">
-            <b-button @click="addMenu">메뉴 추가</b-button>
-          </b-list-group-item>
-        </b-list-group>
+        <b-list-group-item variant="dark">주문 메뉴</b-list-group-item>
+        <b-list-group-item class="MenuDetail" variant="light" :key="key" v-for="(menu, key) in selectedMenu">
+          <b-form-input type="text" id="MenuInput" placeholder="메뉴 이름" v-model="selectedMenu[key]['menuName']"></b-form-input>
+          <b-form-input type="number" id="menuPrice" placeholder="가격" v-model="selectedMenu[key]['price']"></b-form-input>
+          <b-form-input type="number" id="menuCount" placeholder="개수" v-model="selectedMenu[key]['menuCount']"></b-form-input>
+          <b-button class="DelMenu" variant="danger" @click="delMenu(key)">X</b-button>
+        </b-list-group-item>
+        <b-list-group-item variant="light">
+          <b-button @click="addMenu">메뉴 추가</b-button>
+        </b-list-group-item>
+      </b-list-group>
     </div>
       <textarea id="ReqestInput" cols="27" rows="4" placeholder="요청사항을 적어주세요."></textarea>
-      <b-button variant="success">메뉴 담기</b-button>
+      <b-button variant="success" style="float: right;" @click="requestMenu">메뉴 담기</b-button>
   </b-modal>
 </template>
 
@@ -31,9 +30,9 @@ export default {
   data() {
     return {
       selectedMenu:[{
-          "category":null,
           "menuName":null,
-          "customMenu":null
+          "price":null,
+          "menuCount":null
         }
       ]
       ,
@@ -58,11 +57,24 @@ export default {
   },
   methods:{
     addMenu(){
+      console.log(this.selectedMenu)
       this.selectedMenu.push({
-          category:null,
-          menuName:null
+          "menuName":null,
+          "price":null,
+          "menuCount":null
         })
       console.log(this.selectedMenu)
+    },
+    delMenu(num){
+      this.selectedMenu.splice(num,1);
+      console.log(this.selectedMenu)
+    },
+    requestMenu(){
+      console.log(this.selectedMenu)
+      /*
+      axios
+      */
+      this.$bvModal.hide("MenuModal")
     }
   }
 }
@@ -89,33 +101,22 @@ export default {
   height: 27%;
   text-overflow:clip;
 }
-.MenuTable{
-  width: 100%;
-  height: 100%;
-  background: #f0f0f0;
-}
-.MenuTable td{
-  width: 30%;
-  text-align: center;
-}
-.MenuTable p{
-  font-weight: bold;
-  font-size: 1.2em;
-}
-.MenuImg{
-  width: 170px;
-  height: 170px;
-  object-fit: contain;
-}
-#category{
-  width: 30%;
-  float: left;
+.DelMenu{
+  float: right;
 }
 #menuCount{
   width: 10%;
+  float: left;
 }
-#customMenuInput{
+#MenuInput{
+  width: 50%;
+  float: left;
+}
+#menuPrice{
   width: 30%;
   float: left;
+}
+.MenuDetail input{
+  margin-right: 1%;
 }
 </style>
