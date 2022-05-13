@@ -1,13 +1,13 @@
 <template>
   <div class="sidebar">
     <b-sidebar id="sidebar-1" title="Sidebar" shadow>
-      <div class="logo"><img src="../assets/premium-icon-food-5134814.png" style="width:100px" @click="$router.push('main')"/></div>
-      <div class="roomlistButton"><b-button @click="goRoomList">방 찾기</b-button></div>
-      <div class="roomlistButton"><b-button @click="$router.push('createroom')">방 만들기</b-button></div>
+      <!-- <div class="logo"><img src="../assets/premium-icon-food-5134814.png" style="width:100px" @click="$router.push('main')"/></div> -->
+      <div class="roomlistButton"><b-button @click="goRoomList" variant="outline-success">방 찾기</b-button></div>
+      <div class="roomlistButton"><b-button @click="$router.push('createroom')" variant="outline-success">방 만들기</b-button></div>
       <div class="sidebarFooter">
-        <div class="roomlistButton"><b-button @click="$router.push('login')">로그인</b-button></div>
-        <div class="roomlistButton"><b-button @click="$router.push('register')">회원가입</b-button></div>
-        <div class="sidebarInfo"><h3>phone 010-5044-5388</h3></div>
+        <div class="roomlistButton"><b-button @click="$router.push('login')" variant="outline-success">로그인</b-button></div>
+        <div class="roomlistButton"><b-button @click="$router.push('register')" variant="outline-success">회원가입</b-button></div>
+        <div class="sidebarInfo"><h3>info</h3></div>
       </div>
     </b-sidebar>
   </div>
@@ -34,7 +34,8 @@ export default {
 
 <style>
 .sidebar{
-    background: #80cae3;
+    background: #bdecb6;
+    box-shadow: 1px 0px 6px 1px gray;
 }
 .logo{
   width: 100%;
@@ -57,7 +58,8 @@ export default {
   margin-bottom: 1em;
 }
 .sidebarInfo{
-  background: gray;
+  background: rgba(256,256,256,0.4);
   height: 5em;
+  color: rgba(200, 200, 200, 0.8)
 }
 </style>
