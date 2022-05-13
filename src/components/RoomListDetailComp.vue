@@ -28,12 +28,7 @@
 
 <script>
 import roomDetail from "../json/roomDetail.json"
-<<<<<<< HEAD
 import axios from 'axios'
-=======
-import RoomListMenuCompVue from "./RoomListMenuComp.vue";
-
->>>>>>> skwogus-RoomList
 export default {
   name: "RoomListDetailComp",
   props:['roomId'],
@@ -50,7 +45,6 @@ export default {
       alert(room.title);
     },
     order(){
-<<<<<<< HEAD
       let data = {
         money: "5000",
         id: 1
@@ -63,12 +57,6 @@ export default {
       .catch((err)=>{
         console.log(err)
       })
-=======
-      alert(this.roomId)
-    },
-    openMenu(){
-      this.$bvModal.show("MenuModal")
->>>>>>> skwogus-RoomList
     }
   },
 };
