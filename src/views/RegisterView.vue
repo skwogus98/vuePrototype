@@ -13,7 +13,7 @@
           required
           :state="vailidEmail"
         />
-        <b-form-invalid-feedback :state="vailidEmail">
+        <b-form-invalid-feedback :state="vailidEmail" v-if="emailChecked">
           이미 사용중인 이메일 입니다.
         </b-form-invalid-feedback>
         <b-form-valid-feedback :state="vailidEmail">
@@ -34,7 +34,7 @@
           required
           :state="vailidNickname"
         />
-        <b-form-invalid-feedback :state="vailidNickname">
+        <b-form-invalid-feedback :state="vailidNickname" v-if="nicknameChecked">
           이미 사용중인 닉네임 입니다.
         </b-form-invalid-feedback>
         <b-form-valid-feedback :state="vailidNickname">
@@ -130,6 +130,8 @@ export default {
       vailidEmail: false,
       vailidNickname: false,
       checkAccept: false,
+      emailChecked: false,
+      nicknameChecked: false,
     };
   },
   components: {},
@@ -148,7 +150,7 @@ export default {
 
     submitForm() {
       //alert(this.id + this.password + this.nickname + this.age)
-      var url = "http://localhost:8080";
+      var url = "http://117.20.209.64:8080";
       // var signUpData = {
       //   user_email: this.user_email,
       //   user_pw: this.user_pw,
@@ -194,12 +196,15 @@ export default {
     },
     checkEmail() {
       this.registerData.email;
+      this.emailChecked = true;
       //Get method
       this.vailidEmail = true;
       //
     },
     checkNickname() {
       this.registerData.nickname;
+      //this.registerData.nickname;
+      this.nicknameChecked = true;
       //Get method
       this.vailidNickname = true;
       //
