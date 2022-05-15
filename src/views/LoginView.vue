@@ -4,7 +4,7 @@
       <img src="../assets/logo.png" width="100px" />
     </div>
 
-    <b-form class="login">
+    <b-form class="login" @submit="successLogin">
       <div class="inputBox">
         id
         <b-form-input type="text" v-model="id" />
@@ -13,7 +13,7 @@
         pw
         <b-form-input type="password" v-model="password" />
       </div>
-      <b-button id="loginButton" @click="successLogin"> 로그인 </b-button>
+      <b-button id="loginButton" type="submit"> 로그인 </b-button>
     </b-form>
 
     <div class="signIn">
@@ -36,7 +36,11 @@ export default {
   components: {},
   methods: {
     successLogin: function () {
-      //alert("hi")
+      //api로 데이터 저장 필요
+      this.$store.commit('login', {
+        userName:this.id
+      })
+      console.log(this.$store.state.userData.userName)
     },
   },
 };
@@ -49,6 +53,7 @@ div {
 .loginBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(180,180,180);
   margin: auto;
   border-radius: 8px;
   margin-top: 0px;

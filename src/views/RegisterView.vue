@@ -238,6 +238,7 @@ div {
 .signUpBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(180,180,180);
   margin: auto;
   border-radius: 8px;
   margin-top: 0px;
