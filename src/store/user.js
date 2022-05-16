@@ -6,7 +6,6 @@ export const store = new Vuex.Store({
         login:false,
         userData:{
             userName:null
-
         }
     },
     mutations:{

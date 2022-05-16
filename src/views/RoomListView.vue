@@ -51,7 +51,7 @@ export default {
     },
     async openMapModal(){
       await this.$bvModal.show('MapModal')
-      this.$refs.createMap.initMap()
+      //this.$refs.createMap.changeMap()
     }
   },
 };
