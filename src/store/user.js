@@ -5,7 +5,9 @@ export const store = new Vuex.Store({
     state:{
         login:false,
         userData:{
-            userName:null
+            userNickname:null,
+            userEmail:null,
+            userCash:null,
         }
     },
     mutations:{

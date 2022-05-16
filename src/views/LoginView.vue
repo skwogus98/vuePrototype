@@ -4,10 +4,10 @@
       <img src="../assets/logo.png" width="100px" />
     </div>
 
-    <b-form class="login" @submit="successLogin">
+    <b-form class="login" @submit="login">
       <div class="inputBox">
-        id
-        <b-form-input type="text" v-model="id" />
+        email
+        <b-form-input type="text" v-model="email" />
       </div>
       <div class="inputBox">
         pw
@@ -24,24 +24,51 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "LoginView",
-  props: {},
   data() {
     return {
-      id: "",
+      email: "",
       password: "",
     };
   },
   components: {},
   methods: {
-    successLogin: function () {
+    login(){
       //api로 데이터 저장 필요
-      this.$store.commit('login', {
-        userName:this.id
-      })
-      console.log(this.$store.state.userData.userName)
-      this.$router.push('/roomList')
+      let data = {
+        user_email: this.email,
+        user_pw: this.password
+      }
+      axios.post(this.HOST+"/login", data)
+        .then(res=>{
+          if(res.data == 'WrongPassword' || res.data == 'InvalidEmail'){
+            alert("다시 입력하세요.")
+          }
+          // Success가 온다면
+          else if(res.data == 'Success'){
+            console.log("success가 왔음")
+            axios.post(this.HOST+'/loginSuccess', {user_email: this.email}, {headers: { "Content-Type": `application/json` }}).then(res=>{
+              this.$store.commit('login', {
+                userNickname: res.data.nickname,
+                userEmail: this.email,
+                userCash: res.data.cash
+              })
+              this.$router.push('/roomList')
+            }).catch(err=>{
+              console.log(err)
+            })
+            // this.$store.state.userData = res.data.
+          }
+        }).catch(err=>{
+          console.log(err)
+        })
+      // this.$store.commit('login', {
+      //   userName:this.id
+      // })
+      // console.log(this.$store.state.userData.userName)
+      // this.$router.push('/roomList')
     },
   },
 };

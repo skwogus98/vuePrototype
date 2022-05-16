@@ -74,7 +74,7 @@ export default {
 <style>
 .sidebar{
     background: #bdecb6;
-    box-shadow: 1px 0px 6px 1px gray;
+    box-shadow: 1px 0px 3px 1px gray;
 }
 .logo{
   width: 100%;
