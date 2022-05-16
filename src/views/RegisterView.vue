@@ -161,6 +161,8 @@ export default {
         .post(url + "/user", this.registerData)
         .then(function (res) {
           alert(res);
+          //로그인 창으로 라우팅
+          this.$router.push('/login')
         })
         .catch(function (err) {
           alert(err);

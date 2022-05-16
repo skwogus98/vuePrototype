@@ -12,7 +12,7 @@
       </room-list-room-comp>
     </td>
     <td id="showMapTd">
-      <b-button variant="outline-info" @click="openMapModal">
+      <b-button variant="outline-info" @click="openMapModal('제주특별자치도 제주시 첨단로 242')"><!-- room.location 사용해야함 -->
         🗺️
       </b-button>
     </td>
@@ -49,9 +49,9 @@ export default {
       this.roomId = Number(room.id)
       //console.log(this.roomId)
     },
-    openMapModal(){
+    openMapModal(addr){
       this.$bvModal.show('MapModal')
-      setTimeout(() => this.$refs.createMap.changeMap(), 200);
+      setTimeout(() => this.$refs.createMap.changeMap(addr), 200);
     }
   },
 };

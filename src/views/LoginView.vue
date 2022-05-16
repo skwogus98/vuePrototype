@@ -41,6 +41,7 @@ export default {
         userName:this.id
       })
       console.log(this.$store.state.userData.userName)
+      this.$router.push('/roomList')
     },
   },
 };

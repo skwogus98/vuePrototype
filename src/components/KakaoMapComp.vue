@@ -1,6 +1,5 @@
 <template>
   <div id="map" style="width:100%;height:400px;"/>
-  <b-button @click="changeMap">refresh</b-button>
 </template>
 
 <script>
@@ -24,8 +23,8 @@ export default {
       map = new kakao.maps.Map(container, options)
       map
     },
-    async changeMap(){
-      console.log("change")
+    changeMap(addr){
+      console.log(addr)
       var map = null;
       const container = document.getElementById("map");
       const options = {
@@ -35,19 +34,18 @@ export default {
       map = new kakao.maps.Map(container, options)
       var geocoder = new kakao.maps.services.Geocoder();
       // 주소로 좌표를 검색합니다
-      geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+      geocoder.addressSearch(addr, function(result, status) {
           // 정상적으로 검색이 완료됐으면 
           if (status === kakao.maps.services.Status.OK) {
               var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
               // 결과값으로 받은 위치를 마커로 표시합니다
-              console.log(map)
               var marker = new kakao.maps.Marker({
                   map: map,
                   position: coords
               });
               // 인포윈도우로 장소에 대한 설명을 표시합니다
               var infowindow = new kakao.maps.InfoWindow({
-                  content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;" id="addrMarker">'+ addr + '</div>'
               });
               infowindow.open(map, marker);
 
@@ -69,14 +67,10 @@ export default {
   mounted() {
     if(!window.kakao || window.kakao.maps){
       const script = document.createElement("script");
-      console.log("load0")
       script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=59a464bf1d4f9a4bf5530d15b31ca9f2&libraries=services"
       /* global kakao*/
       script.onload = () => kakao.maps.load(this.initMap);
       document.head.appendChild(script);
-    }
-    else{
-      console.log("load2")
     }
   },
 }

@@ -37,6 +37,7 @@ export default {
     onSubmit(event) {
         event.preventDefault()
         alert(JSON.stringify(this.RoomData))
+        this.$router.push('/roomList')
       },
   },
 };

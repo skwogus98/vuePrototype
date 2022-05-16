@@ -69,7 +69,7 @@ export default {
     height: 45px;
 }
 .orderButton{
-    width: 100%;
+    width: calc(100% - 32px);
     position:absolute;
     bottom: 0px;
     text-align: center;
