@@ -49,9 +49,9 @@ export default {
       this.roomId = Number(room.id)
       //console.log(this.roomId)
     },
-    async openMapModal(){
-      await this.$bvModal.show('MapModal')
-      //this.$refs.createMap.changeMap()
+    openMapModal(){
+      this.$bvModal.show('MapModal')
+      setTimeout(() => this.$refs.createMap.changeMap(), 200);
     }
   },
 };
