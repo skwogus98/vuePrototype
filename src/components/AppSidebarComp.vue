@@ -63,13 +63,12 @@ export default {
       return this.$store.state.login
     },
     welcomeName(){
-      return this.$store.state.userData.userNickname
-      // if(this.$store.state.userData.userNickname==null){
-      //   return "로그인을 해주세요."
-      // }
-      // else{
-      //   return this.$store.state.userData.userNickname + "님 환영합니다!"
-      // }
+      if(this.$store.state.userData.userNickname==null){
+        return "로그인을 해주세요."
+      }
+      else{
+        return this.$store.state.userData.userNickname + "님 환영합니다!"
+      }
     }
   }
 };

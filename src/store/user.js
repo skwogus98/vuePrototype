@@ -5,10 +5,10 @@ export const store = new Vuex.Store({
     state:{
         login:false,
         userData:{
-            userNickname:null,
-            userEmail:null,
-            userCash:null,
-            chargedCash:null,
+            userNickname: null,
+            userEmail: null,
+            userCash: null,
+            chargedCash: null,
         }
     },
     mutations:{
@@ -18,7 +18,12 @@ export const store = new Vuex.Store({
         },
         logout(state){
             state.login = false
-            state.userData = null
+            state.userData = {
+                userNickname: null,
+                userEmail: null,
+                userCash: null,
+                chargedCash: null,
+            }
         },
         chargeCash(state, chargedCash){
             state.userData.userCash += chargedCash
