@@ -41,6 +41,7 @@ export default {
         user_email: this.email,
         user_pw: this.password
       }
+      console.log("로그인 시도")
       axios.post(this.HOST+"/login", data)
         .then(res=>{
           if(res.data == 'WrongPassword' || res.data == 'InvalidEmail'){
@@ -53,8 +54,10 @@ export default {
               this.$store.commit('login', {
                 userNickname: res.data.nickname,
                 userEmail: this.email,
-                userCash: res.data.cash
+                userCash: res.data.cash,
+                chargedCash: null
               })
+              // console.log(this.$store.state.userData.userEmail)
               this.$router.push('/roomList')
             }).catch(err=>{
               console.log(err)

@@ -3,21 +3,26 @@ import createPersistedState from "vuex-persistedstate";
 
 export const store = new Vuex.Store({
     state:{
-        login:true,
+        login:false,
         userData:{
-            userNickname:"효자이씨",
+            userNickname:null,
             userEmail:null,
             userCash:null,
+            chargedCash:null,
         }
     },
     mutations:{
         login(state, userData){
             state.login = true
-            state.userData.userName = userData.userName
+            state.userData = userData
         },
         logout(state){
             state.login = false
-            state.userData.userName = null
+            state.userData = null
+        },
+        chargeCash(state, chargedCash){
+            state.userData.userCash += chargedCash
+            state.userData.chargedCash = chargedCash
         }
     },
     plugins: [createPersistedState()],//vuex 데이터 지속

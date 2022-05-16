@@ -13,10 +13,10 @@
           <b-button @click="$router.push('#')" variant="outline-success">마이 페이지</b-button>
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('#')" variant="outline-success">캐시 충전</b-button>
+          <b-button @click="$router.push('cash')" variant="outline-success">캐시 충전</b-button>
         </div>
         <div class="roomlistButton">
-          <b-button @click="this.$store.commit('logout')" variant="danger">로그아웃</b-button>
+          <b-button @click="logout" variant="danger">로그아웃</b-button>
         </div>
       </div>
       <div id="NotLoginSideContent" v-else>
@@ -35,7 +35,6 @@
       </div>
       <div class="sidebarInfo">{{welcomeName}}<h3></h3></div>
       </b-sidebar>
-      
   </div>
 </template>
 
@@ -53,6 +52,10 @@ export default {
     async goRoomList(){
       await this.$router.push('roomlist')
       window.location.reload()
+    },
+    logout(){
+      this.$store.commit('logout')
+      this.$router.push('main')
     }
   },
   computed: {
@@ -60,12 +63,13 @@ export default {
       return this.$store.state.login
     },
     welcomeName(){
-      if(this.$store.state.userData.userName==null){
-        return null
-      }
-      else{
-        return this.$store.state.userData.userName + "님 환영합니다!"
-      }
+      return this.$store.state.userData.userNickname
+      // if(this.$store.state.userData.userNickname==null){
+      //   return "로그인을 해주세요."
+      // }
+      // else{
+      //   return this.$store.state.userData.userNickname + "님 환영합니다!"
+      // }
     }
   }
 };
