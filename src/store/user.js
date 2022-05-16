@@ -3,9 +3,9 @@ import createPersistedState from "vuex-persistedstate";
 
 export const store = new Vuex.Store({
     state:{
-        login:false,
+        login:true,
         userData:{
-            userNickname:null,
+            userNickname:"효자이씨",
             userEmail:null,
             userCash:null,
         }

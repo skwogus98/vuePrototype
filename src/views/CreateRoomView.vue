@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "CreateRoomView",
   props: {},
@@ -36,8 +37,22 @@ export default {
   methods: {
     onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.RoomData))
-        this.$router.push('/roomList')
+        // alert(JSON.stringify(this.RoomData))
+        // this.$router.push('/roomList')
+
+
+        axios.post(this.HOST+"/room", {
+            title: this.RoomData.title,
+            gatheringPlace: this.RoomData.place,
+            createdBy: this.$store.state.userData.userNickname,
+            minimumOrderAmount: this.RoomData.money,
+            numOfPeople: this.RoomData.person
+        }).then(res=>{
+            console.log(res)
+            this.$router.push('/roomList')
+        }).catch(err=>{
+            console.log(err)
+        })
       },
   },
 };

@@ -3,12 +3,19 @@
     <table class="roomListTable">
     <td @click="enterRoom(room)">
       <room-list-room-comp>
-        <template #roomTitle> {{ room.title }}</template>
+        <!-- <template #roomTitle> {{ room.title }}</template>
         <template #numPeople>
           {{ room.currentPerson }}/{{ room.maxPerson }}
         </template>
         <template #location> {{ room.location }} </template>
-        <template #price> {{ room.fundedPrice }}/{{ room.price }} </template>
+        <template #price> {{ room.fundedPrice }}/{{ room.price }} </template> -->
+        <!-- =======================테스트====================== -->
+        <template #roomTitle> {{ room.title }}</template>
+        <template #numPeople>
+          {{ room.currNumOfPeople }}/{{ room.maximumPeople }}
+        </template>
+        <template #location> {{ room.gatheringPlace }} </template>
+        <template #price> {{ room.currentAmount }}/{{ room.minimumOrderAmount }} </template>
       </room-list-room-comp>
     </td>
     <td id="showMapTd">
@@ -18,6 +25,7 @@
     </td>
     </table>
   </div>
+  <b-button @click="getRoomList" v-if="showMoreBtn">더보기</b-button>
   <room-list-detail-comp :roomId="roomId"/>
   <b-modal id="MapModal" hide-footer title="위치">
     <kakao-map-comp-vue ref="createMap"></kakao-map-comp-vue>
@@ -29,6 +37,7 @@ import RoomListDetailComp from '../components/RoomListDetailComp.vue';
 import RoomListRoomComp from "../components/RoomListRoomComp.vue";
 import KakaoMapCompVue from '../components/KakaoMapComp.vue';
 import roomList from "../json/roomList.json";
+import axios from 'axios';
 
 export default {
   name: "RoomListView",
@@ -40,7 +49,9 @@ export default {
   data() {
     return {
       roomData: roomList,
-      roomId: 1
+      roomId: 1,
+      roomLimit: 0,
+      showMoreBtn: true
     };
   },
   methods: {
@@ -52,8 +63,21 @@ export default {
     openMapModal(addr){
       this.$bvModal.show('MapModal')
       setTimeout(() => this.$refs.createMap.changeMap(addr), 200);
+    },
+    getRoomList(){
+      this.roomLimit += 5
+      axios.get(this.HOST+"/room/" + this.roomLimit).then(res=>{
+        this.roomData = res.data
+        // console.log("roomLimit: " + this.roomLimit + ", length: " + res.data.length)
+        if(this.roomLimit > res.data.length){
+          this.showMoreBtn = false
+        }
+      })
     }
   },
+  mounted(){
+    this.getRoomList()
+  }
 };
 </script>
 
