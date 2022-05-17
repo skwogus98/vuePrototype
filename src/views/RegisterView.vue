@@ -125,8 +125,8 @@ export default {
         phoneNum: "010-4725-5788",
       },
       passwordCheck: "",
-      passwordCheckData: "",
       phoneCheck: "",
+      phoneCheckData: "",
       vailidEmail: false,
       vailidNickname: false,
       checkAccept: false,
@@ -138,65 +138,104 @@ export default {
   methods: {
     checkPhoneNumber() {
       axios
-        .post(this.HOST + "/sendSMS", {param: this.registerData.phoneNum}, {
-          headers: { "Content-Type": `application/json` },
-        })
+        .post(
+          this.HOST + "/sendSMS",
+          { param: this.registerData.phoneNum },
+          {
+            headers: { "Content-Type": `application/json` },
+          }
+        )
         .then((res) => {
           alert(this.registerData.phoneNum + "으로 인증번호를 보냈습니다.");
           this.phoneCheckData = res.data;
-          console.log(res.data)
+          console.log(res.data);
         });
     },
     checkEmail() {
       this.emailChecked = true;
 
-      console.log(this.registerData.email)
-      axios.post(this.HOST+"/email", {param: this.registerData.email}, {headers: { "Content-Type": `application/json` }}).then(res=>{
-        console.log(res)
-        // 이메일이 중복되지 않는다면
-        if(res.data == 'NonExist'){
-          this.vailidEmail = true;
-        }
-        else{
-          this.vailidEmail = false;
-        }
-      }).catch(err=>{
-        console.log(err)
-      })
+      console.log(this.registerData.email);
+      axios
+        .post(
+          this.HOST + "/email",
+          { param: this.registerData.email },
+          { headers: { "Content-Type": `application/json` } }
+        )
+        .then((res) => {
+          console.log(res);
+          // 이메일이 중복되지 않는다면
+          if (res.data == "NonExist") {
+            this.vailidEmail = true;
+          } else {
+            this.vailidEmail = false;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     checkNickname() {
       this.nicknameChecked = true;
 
-      console.log(this.registerData.nickname)
-      axios.post(this.HOST+"/nickname", {param: this.registerData.nickname}, {headers: { "Content-Type": `application/json` }}).then(res=>{
-        console.log(res)
-        // 닉네임이 중복되지 않는다면
-        if(res.data == 'NonExist'){    
-          this.vailidNickname = true;
-        }
-        else{
-          this.vailidNickname = false;
-        }
-      }).catch(err=>{
-        console.log(err)
-      })
+      console.log(this.registerData.nickname);
+      axios
+        .post(
+          this.HOST + "/nickname",
+          { param: this.registerData.nickname },
+          { headers: { "Content-Type": `application/json` } }
+        )
+        .then((res) => {
+          console.log(res);
+          // 닉네임이 중복되지 않는다면
+          if (res.data == "NonExist") {
+            this.vailidNickname = true;
+          } else {
+            this.vailidNickname = false;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     submitForm() {
+      // 이메일 중복 체크
+      if (this.vailidEmail == false) {
+        alert("이메일을 다시 확인해주세요.");
+        return;
+      }
+      // 닉네임 중복 체크
+      if (this.vailidNickname == false) {
+        alert("닉네임을 다시 확인해주세요.");
+        return;
+      }
+      // 휴대폰 인증번호 체크
+      if (this.phoneCheck == null) {
+        alert("휴대폰 인증 번호를 입력해 주세요.");
+        return;
+      } else {
+        if (this.phoneCheck != this.phoneCheckData) {
+          alert("휴대폰 인증 번호가 일치하지 않습니다.");
+          return;
+        }
+      }
+
       let data = {
         user_email: this.registerData.email,
         user_pw: this.registerData.password,
         user_nickname: this.registerData.nickname,
-        user_phoneNumber: this.registerData.phoneNum
-      }
-      console.log(data)
+        user_phoneNumber: this.registerData.phoneNum,
+      };
+      console.log(data);
       axios
-        .post(this.HOST + "/user", data, {headers: { "Content-Type": `application/json` }})
-        .then(() =>{
+        .post(this.HOST + "/user", data, {
+          headers: { "Content-Type": `application/json` },
+        })
+        .then(() => {
           alert("회원가입이 정상적으로 이루어졌습니다!");
           //로그인 창으로 라우팅
-          this.$router.push('login')
+          this.$router.push("login");
         })
-        .catch(err =>{
+        .catch((err) => {
           alert(err);
         });
     },
@@ -257,7 +296,7 @@ div {
 .signUpBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(180,180,180);
+  border: 1px solid rgb(180, 180, 180);
   margin: auto;
   border-radius: 8px;
   margin-top: 0px;

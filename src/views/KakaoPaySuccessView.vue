@@ -4,9 +4,13 @@
       <img src="../assets/logo.png" width="100px" />
     </div>
     <b-form class="login">
-      <div class="inputBox">캐시 {{$store.state.userData.chargedCash}}원이 충전되었습니다.</div>
-        <h2>잔여 캐시 : {{$store.state.userData.userCash}}</h2>
-      <b-button id="loginButton">돌아가기</b-button>
+      <div class="inputBox">
+        캐시 {{ $store.state.userData.chargedCash }}원이 충전되었습니다.
+      </div>
+      <h2>잔여 캐시 : {{ $store.state.userData.userCash }}</h2>
+      <b-button id="loginButton" @click="$router.push('main')"
+        >돌아가기</b-button
+      >
     </b-form>
   </div>
 </template>
