@@ -34,25 +34,7 @@ export default {
           "price":null,
           "menuCount":null
         }
-      ]
-      ,
-      categorySelect:[
-        { value: 'coffee', text: '커피'},
-        { value: 'desert',text: '디저트'}
       ],
-      menuNameSelect:{
-        'coffee': [
-          {value: 'americano', text: '아메리카노'},
-          {value: 'cafeLatte', text: '카페라떼'},
-          {value: 'cafeMoca', text: '카페모카'},
-          {value: 'custom', text: '직접 입력'}      
-        ],
-        'desert': [
-          {value: 'cake', text: '케이크'},
-          {value: 'croffle', text: '크로플'},
-          {value: 'custom', text: '직접 입력'}      
-        ],
-      }
     }
   },
   methods:{
@@ -75,6 +57,13 @@ export default {
       axios
       */
       this.$bvModal.hide("MenuModal")
+    },
+    setMenu(userMenu){
+      if(userMenu.length!=0){
+        this.selectMenu = null
+        this.selectMenu = userMenu
+      }
+      //this.selectMenu = userMenu
     }
   }
 }

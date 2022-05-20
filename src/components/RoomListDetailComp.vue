@@ -5,16 +5,16 @@
           <div class="SelectedMenuList">
             <b-list-group>
               <b-list-group-item variant="dark">주문 메뉴</b-list-group-item>
-              <b-list-group-item variant="info" :key="key" v-for="(user, key) in selectedMenu">
+              <b-list-group-item variant="light" :key="key" v-for="(user, key) in selectedMenu">
                 <p>{{user["userName"]}}</p>
-                <b-list-group-item class="MenuDetail" variant="light" :key="menuNum" v-for="(menu, menuNum) in user['menu']">
+                <b-list-group-item class="MenuDetail" variant="info" :key="menuNum" v-for="(menu, menuNum) in user['menu']">
                 {{menu["menuName"]}} : {{menu["price"]}}원
                 <b-badge variant="success" pill>{{menu["menuCount"]}}</b-badge>
                 </b-list-group-item>
               </b-list-group-item>
             </b-list-group>
           </div>
-          <b-button id="menuSelect" @click="openMenu">메뉴선택</b-button>
+          <b-button id="menuSelect" @click="openMenu(selectedMenu[0]['menu'])">메뉴선택</b-button>
           <h3 style="margin-top: 30px">주문 금액: 0원</h3>
       </div>
       <div class="roomDetailRight">
@@ -34,7 +34,7 @@
       <div class="orderButton">
           <b-button @click="order()">주문하기</b-button>
       </div>
-      <room-list-menu-comp-vue></room-list-menu-comp-vue>
+      <room-list-menu-comp-vue ref="menuModal"></room-list-menu-comp-vue>
     </b-modal>
 </template>
 
@@ -114,7 +114,8 @@ export default {
     order(){
       alert(this.roomId)
     },
-    openMenu(){
+    openMenu(userMenu){
+      this.$refs.menuModal.setMenu(userMenu)
       this.$bvModal.show("MenuModal")
     }
   },
@@ -148,5 +149,8 @@ export default {
 }
 #userName{
     width: 95%;
+}
+#menuSelect{
+  margin-top: 0.5em;
 }
 </style>
