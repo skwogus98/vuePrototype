@@ -54,7 +54,7 @@ export default {
     //페이지 이동시 모달창이 삭제되지 않고 남아있어 페이지 리로드를 하여 이 부분을 삭제함
     async goRoomList(){
       await this.$router.push('roomlist')
-      window.location.reload()
+      // window.location.reload()
     },
     logout(){
       this.$store.commit('logout')
