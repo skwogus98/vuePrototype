@@ -5,10 +5,10 @@
     <div class="MenuContainer">
       <b-list-group>
         <b-list-group-item variant="dark">주문 메뉴</b-list-group-item>
-        <b-list-group-item class="MenuDetail" variant="light" :key="key" v-for="(menu, key) in selectedMenu">
-          <b-form-input type="text" id="MenuInput" placeholder="메뉴 이름" v-model="selectedMenu[key]['menuName']"></b-form-input>
-          <b-form-input type="number" id="menuPrice" placeholder="가격" v-model="selectedMenu[key]['price']"></b-form-input>
-          <b-form-input type="number" id="menuCount" placeholder="개수" v-model="selectedMenu[key]['menuCount']"></b-form-input>
+        <b-list-group-item class="MenuDetail" variant="light" :key="key" v-for="(menu, key) in selectMenu">
+          <b-form-input type="text" id="MenuInput" placeholder="메뉴 이름" v-model="selectMenu[key]['menuName']"></b-form-input>
+          <b-form-input type="number" id="menuPrice" placeholder="가격" v-model="selectMenu[key]['price']"></b-form-input>
+          <b-form-input type="number" id="menuCount" placeholder="개수" v-model="selectMenu[key]['menuCount']"></b-form-input>
           <b-button class="DelMenu" variant="danger" @click="delMenu(key)">X</b-button>
         </b-list-group-item>
         <b-list-group-item variant="light">
@@ -29,52 +29,41 @@ export default {
   },
   data() {
     return {
-      selectedMenu:[{
+      selectMenu:[{
           "menuName":null,
           "price":null,
           "menuCount":null
         }
-      ]
-      ,
-      categorySelect:[
-        { value: 'coffee', text: '커피'},
-        { value: 'desert',text: '디저트'}
       ],
-      menuNameSelect:{
-        'coffee': [
-          {value: 'americano', text: '아메리카노'},
-          {value: 'cafeLatte', text: '카페라떼'},
-          {value: 'cafeMoca', text: '카페모카'},
-          {value: 'custom', text: '직접 입력'}      
-        ],
-        'desert': [
-          {value: 'cake', text: '케이크'},
-          {value: 'croffle', text: '크로플'},
-          {value: 'custom', text: '직접 입력'}      
-        ],
-      }
     }
   },
   methods:{
     addMenu(){
-      console.log(this.selectedMenu)
-      this.selectedMenu.push({
+      console.log(this.selectMenu)
+      this.selectMenu.push({
           "menuName":null,
           "price":null,
           "menuCount":null
         })
-      console.log(this.selectedMenu)
+      console.log(this.selectMenu)
     },
     delMenu(num){
-      this.selectedMenu.splice(num,1);
-      console.log(this.selectedMenu)
+      this.selectMenu.splice(num,1);
+      console.log(this.selectMenu)
     },
     requestMenu(){
-      console.log(this.selectedMenu)
+      console.log(this.selectMenu)
       /*
       axios
       */
       this.$bvModal.hide("MenuModal")
+    },
+    setMenu(userMenu){
+      if(userMenu.length!=0){
+        this.selectMenu = null
+        this.selectMenu = userMenu
+      }
+      //this.selectMenu = userMenu
     }
   }
 }
@@ -91,10 +80,6 @@ export default {
 .MenuSeleced{
   width: 29%;
   float: right;
-}
-.SelectedMenu{
-  background: #f0f0f0;
-  overflow: auto
 }
 #ReqestInput{
   width: 100%;
