@@ -1,15 +1,12 @@
 <template>
-  <div class="loginBg">
-    <div class="img">
-      <img src="../assets/logo.png" width="100px" />
-    </div>
-
-    <b-form class="login">
-      <div class="inputBox">
-        충전할 금액을 입력하세요.
-        <b-form-input type="number" v-model="cash" />
+  <div class="cashBg">
+    <b-form class="cashForm">
+      <h3>충전할 금액을 입력하세요.</h3>
+      <b-form-input type="number" v-model="cash" />
+      <div class="moneyButtonGroup">
+        <b-button :key="key" v-for="(data, key) in moneyGroup" @click="addCash(data)" variant="outline-dark">+ {{data}}원</b-button>
       </div>
-      <b-button id="loginButton" @click="chargeCash">충전하기</b-button>
+      <b-button id="loginButton" @click="chargeCash" variant="success">충전하기</b-button>
     </b-form>
   </div>
 </template>
@@ -21,6 +18,9 @@ export default {
   data() {
     return {
       cash: 0,
+      moneyGroup:[
+        1000,5000,10000,30000,50000
+      ]
     };
   },
   methods: {
@@ -39,6 +39,9 @@ export default {
           console.log(err);
         });
     },
+    addCash(addedCash){
+      this.cash = this.cash+ addedCash
+    }
   },
 };
 </script>
@@ -47,45 +50,38 @@ export default {
 div {
   box-sizing: border-box;
 }
-.loginBg {
+.cashBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
   margin: auto;
   border-radius: 8px;
-  margin-top: 20%;
-  margin-bottom: 30px;
+  padding: 5em;
 }
-.login {
-  text-align: left;
-  width: 250px;
-  margin: 0 auto;
-  margin-top: 10px;
-}
-.inputBox {
+.cashForm {
   text-align: left;
   width: 100%;
   margin: 0 auto;
-  background: rgba(223, 223, 223, 30%);
-  border: rgba(80, 80, 80, 100%);
-  border-radius: 6px;
-  border-width: 10px;
   margin-top: 10px;
-  padding: 7px;
 }
-.inputBox input {
+.cashForm h3{
+  margin-bottom: 1em;
+}
+.cashForm input {
+  width: calc(100% - 0.6em);
+  margin-bottom: 1em;
+  margin: 0.3em;
+}
+.cashForm button {
+  width: calc(100% - 0.6em);
+  margin: 0.3em;
+  margin-top: 1em;
+}
+.moneyButtonGroup{
   width: 100%;
-  border: none;
-  background: transparent;
 }
-#loginButton {
-  width: 100%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.signIn {
-  padding: 20px;
-  margin-top: 20px;
-  border-top: solid rgb(190, 190, 190);
-  border-width: 0.1px;
+.moneyButtonGroup button{
+  width: calc((100% - (0.3em * 10))/5);
+  margin: 0.3em;
+  margin-top: 1em;
 }
 </style>

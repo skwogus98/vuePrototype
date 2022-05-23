@@ -1,4 +1,8 @@
 <template>
+  <div class="searchBox">
+    <b-form-input v-model="searchText"/>
+    <b-button variant="success">검색</b-button>
+  </div>
   <div :key="key" v-for="(room, key) in roomData">
     <table class="roomListTable">
     <td @click="enterRoom(room)">
@@ -51,7 +55,8 @@ export default {
       roomData: roomList,
       roomId: 1,
       roomLimit: 0,
-      showMoreBtn: true
+      showMoreBtn: true,
+      searchText:""
     };
   },
   methods: {
@@ -113,5 +118,22 @@ table{
 }
 .roomListTable {
   margin-bottom: 1em;
+}
+.searchBox{
+  width: 100%;
+  height: 6em;
+  margin-bottom: 3em;
+}
+.searchBox input{
+  width: calc(100% - 200px);
+  height: 100%;
+  font-size: 2em;
+  float: left;
+}
+.searchBox button{
+  width: 200px;
+  height: 100%;
+  font-size: 2em;
+  float: left;
 }
 </style>
