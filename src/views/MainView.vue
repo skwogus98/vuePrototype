@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <b-button @click="$router.push('roomlist')">주문하러 가기</b-button>
   </div>
 </template>
 

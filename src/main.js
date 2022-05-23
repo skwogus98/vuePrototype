@@ -10,4 +10,4 @@ const app = createApp(App)
 app.use(BootstrapVue3)
 app.use(store)
 app.use(router).mount('#app')
-app.config.globalProperties.HOST = "http://202.31.200.215:8080"
+app.config.globalProperties.HOST = "http://202.31.200.219:8080"
