@@ -36,7 +36,7 @@
 import RoomListDetailComp from '../components/RoomListDetailComp.vue';
 import RoomListRoomComp from "../components/RoomListRoomComp.vue";
 import KakaoMapCompVue from '../components/KakaoMapComp.vue';
-import roomList from "../json/roomList.json";
+// import roomList from "../json/roomList.json";
 import axios from 'axios';
 
 export default {
@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      roomData: roomList,
+      roomData: null,
       roomId: 1,
       roomLimit: 0,
       showMoreBtn: true
@@ -56,9 +56,11 @@ export default {
   },
   methods: {
     enterRoom(room) {
-      this.$bvModal.show('roomDetailModal')
-      this.roomId = Number(room.id)
-      //console.log(this.roomId)
+      if(this.$store.state.login == true){
+        this.$bvModal.show('roomDetailModal')
+        this.roomId = Number(room.id)
+        //console.log(this.roomId)
+      }
     },
     openMapModal(addr){
       this.$bvModal.show('MapModal')

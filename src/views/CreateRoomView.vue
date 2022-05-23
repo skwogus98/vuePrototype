@@ -40,7 +40,6 @@ export default {
         // alert(JSON.stringify(this.RoomData))
         // this.$router.push('/roomList')
 
-
         axios.post(this.HOST+"/room", {
             title: this.RoomData.title,
             gatheringPlace: this.RoomData.place,

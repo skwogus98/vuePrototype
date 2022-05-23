@@ -18,6 +18,9 @@
         <div class="roomlistButton">
           <b-button @click="logout" variant="danger">로그아웃</b-button>
         </div>
+        <div class="roomlistButton">
+          <h2>캐시 : {{$store.state.userData.userCash}}</h2>
+        </div>
       </div>
       <div id="NotLoginSideContent" v-else>
         <div class="roomlistButton">
@@ -33,7 +36,7 @@
           <b-button @click="$router.push('register')" variant="outline-success">회원가입</b-button>
         </div>
       </div>
-      <div class="sidebarInfo">{{welcomeName}}<h3></h3></div>
+      <div class="sidebarInfo">{{welcomeName}}</div>
       </b-sidebar>
   </div>
 </template>

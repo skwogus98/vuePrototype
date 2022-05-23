@@ -132,6 +132,7 @@ export default {
       checkAccept: false,
       emailChecked: false,
       nicknameChecked: false,
+      
     };
   },
   components: {},
@@ -149,7 +150,9 @@ export default {
           alert(this.registerData.phoneNum + "으로 인증번호를 보냈습니다.");
           this.phoneCheckData = res.data;
           console.log(res.data);
-        });
+        }).catch(err=>{
+          console.log(err)
+        })
     },
     checkEmail() {
       this.emailChecked = true;
@@ -208,6 +211,18 @@ export default {
         alert("닉네임을 다시 확인해주세요.");
         return;
       }
+      // 비밀번호 자릿수 체크
+      if(this.registerData.password.length < 8){
+        alert("비밀번호는 8자리 이상이여야 합니다.");
+        return
+      }
+      else{
+        // 비밀번호 재확인
+        if(this.passwordCheck != this.registerData.password){
+          alert("비밀번호가 일치하지 않습니다.");
+          return
+        }
+      }
       // 휴대폰 인증번호 체크
       if (this.phoneCheck == null) {
         alert("휴대폰 인증 번호를 입력해 주세요.");
@@ -217,6 +232,11 @@ export default {
           alert("휴대폰 인증 번호가 일치하지 않습니다.");
           return;
         }
+      }
+      // 약관 동의 체크
+      if(this.checkAccept == false){
+        alert("약관 동의란에 체크해주세요.");
+        return;
       }
 
       let data = {
