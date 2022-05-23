@@ -6,7 +6,7 @@
       <div class="moneyButtonGroup">
         <b-button :key="key" v-for="(data, key) in moneyGroup" @click="addCash(data)" variant="outline-dark">+ {{data}}원</b-button>
       </div>
-      <b-button id="loginButton" @click="chargeCash" variant="success">충전하기</b-button>
+      <b-button @click="chargeCash" variant="success">충전하기</b-button>
     </b-form>
   </div>
 </template>

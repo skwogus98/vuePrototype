@@ -9,6 +9,7 @@ const ReportView = () => import("../views/ReportView.vue");
 const CreateRoomView = () => import("../views/CreateRoomView.vue");
 const CashView = () => import("../views/CashView.vue");
 const KakaoPaySuccessView = () => import("../views/KakaoPaySuccessView.vue");
+const MyPageView = () => import("../views/MyPageView.vue")
 
 const routes = [
   {
@@ -50,6 +51,10 @@ const routes = [
   {
     path: "/kakaoPaySuccess",
     component: KakaoPaySuccessView,
+  },
+  {
+    path: "/mypage",
+    component: MyPageView,
   },
 ];
 

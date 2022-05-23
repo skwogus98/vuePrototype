@@ -10,7 +10,7 @@
           <b-button @click="$router.push('createroom')" variant="outline-success">방 만들기</b-button>
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('#')" variant="outline-success">마이 페이지</b-button>
+          <b-button @click="$router.push('mypage')" variant="outline-success">마이 페이지</b-button>
         </div>
         <div class="roomlistButton">
           <b-button @click="$router.push('cash')" variant="outline-success">캐시 충전</b-button>
