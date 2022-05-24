@@ -1,12 +1,16 @@
 module.exports = {
-  outputDir: "C://Users//Ted//Desktop//Spring-Socket-Study//src//main//resources//static",
+  outputDir:
+    "C://Users//phdlj//Desktop//GraduationWork//src//main//resources//static",
+  // outputDir:
+  //   // "C://Users//phdlj//Desktop//GraduationWork//src//main//resources//templates",
   devServer: {
-    proxy: {
-      "/": {
-        target: "http://202.31.200.219:8080",
-        pathRewrite: { "^/": "" },
-        changeOrigin: true,
-      },
-    },
+    port: 8081,
+    // proxy: {
+    //   "/": {
+    //     target: "http://localhost:8080",
+    //     pathRewrite: { "^/": "" },
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 };

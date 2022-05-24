@@ -1,11 +1,15 @@
 <template>
   <div class="app">
-    <b-button id="sidebar-hide" @click="sidebarOn = !sidebarOn" v-if="sidebarOn">&lt;</b-button>
-    <b-button id="sidebar-show" @click="sidebarOn = !sidebarOn" v-else>&gt;</b-button>
+    <b-button id="sidebar-hide" @click="sidebarOn = !sidebarOn" v-if="sidebarOn"
+      >&lt;</b-button
+    >
+    <b-button id="sidebar-show" @click="sidebarOn = !sidebarOn" v-else
+      >&gt;</b-button
+    >
     <div class="sidebar" v-if="sidebarOn">
-      <AppSidebarComp/>
+      <AppSidebarComp />
     </div>
-    <div :class="[sidebarOn ? 'content': 'content-no-sidebar']">
+    <div :class="[sidebarOn ? 'content' : 'content-no-sidebar']">
       <!-- 동적 클래스 전환 -->
       <router-view></router-view>
     </div>
@@ -16,18 +20,17 @@
 import AppSidebarComp from "./components/AppSidebarComp.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     AppSidebarComp,
   },
   data() {
     return {
-      sidebarOn : true
-    }
+      sidebarOn: true,
+    };
   },
-  methods: {
-  }
-}
+  methods: {},
+};
 </script>
 
 <style>
@@ -41,9 +44,9 @@ export default {
   margin-top: 0px;
   width: 100%;
   height: 100%;
-  position:fixed;
+  position: fixed;
 }
-.sidebar{
+.sidebar {
   width: 320px;
   box-sizing: border-box;
   position: fixed;
@@ -51,35 +54,34 @@ export default {
   height: 100%;
   z-index: 1;
 }
-.content{
+.content {
   margin-left: 320px;
   position: fixed;
   height: 100%;
   padding: 100px;
   width: calc(100% - 320px);
   padding-top: 50px;
-  overflow: auto
+  overflow: auto;
 }
-.content-no-sidebar{
+.content-no-sidebar {
   margin-left: 0px;
   position: fixed;
   height: 100%;
   padding: 100px;
   padding-top: 10px;
   width: calc(100%);
-  overflow: auto
+  overflow: auto;
 }
-#sidebar-show{
+#sidebar-show {
   position: fixed;
   top: calc(50% - 20px);
   left: 0px;
   z-index: 3;
 }
-#sidebar-hide{
+#sidebar-hide {
   position: fixed;
   top: calc(50% - 20px);
   left: 320px;
   z-index: 3;
 }
-
 </style>

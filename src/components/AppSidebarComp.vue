@@ -4,40 +4,56 @@
       <!-- <div class="logo"><img src="../assets/premium-icon-food-5134814.png" style="width:100px" @click="$router.push('main')"/></div> -->
       <div id="LoginSideContent" v-if="isLogin">
         <div class="roomlistButton">
-          <b-button @click="goRoomList" variant="outline-success">방 찾기</b-button>
+          <b-button @click="goRoomList" variant="outline-success"
+            >방 찾기</b-button
+          >
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('createroom')" variant="outline-success">방 만들기</b-button>
+          <b-button
+            @click="$router.push('createroom')"
+            variant="outline-success"
+            >방 만들기</b-button
+          >
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('#')" variant="outline-success">마이 페이지</b-button>
+          <b-button @click="$router.push('#')" variant="outline-success"
+            >마이 페이지</b-button
+          >
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('cash')" variant="outline-success">캐시 충전</b-button>
+          <b-button @click="$router.push('cash')" variant="outline-success"
+            >캐시 충전</b-button
+          >
         </div>
         <div class="roomlistButton">
           <b-button @click="logout" variant="danger">로그아웃</b-button>
         </div>
         <div class="roomlistButton">
-          <h2>캐시 : {{$store.state.userData.userCash}}</h2>
+          <h2>캐시 : {{ $store.state.userData.userCash }}</h2>
         </div>
       </div>
       <div id="NotLoginSideContent" v-else>
         <div class="roomlistButton">
-          <b-button @click="goRoomList" variant="outline-success">방 찾기</b-button>
+          <b-button @click="goRoomList" variant="outline-success"
+            >방 찾기</b-button
+          >
         </div>
-        <div class="roomlistButton" style="visibility: hidden;">
+        <div class="roomlistButton" style="visibility: hidden">
           <b-button>nothing</b-button>
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('login')" variant="outline-success">로그인</b-button>
+          <b-button @click="$router.push('login')" variant="outline-success"
+            >로그인</b-button
+          >
         </div>
         <div class="roomlistButton">
-          <b-button @click="$router.push('register')" variant="outline-success">회원가입</b-button>
+          <b-button @click="$router.push('register')" variant="outline-success"
+            >회원가입</b-button
+          >
         </div>
       </div>
-      <div class="sidebarInfo">{{welcomeName}}</div>
-      </b-sidebar>
+      <div class="sidebarInfo">{{ welcomeName }}</div>
+    </b-sidebar>
   </div>
 </template>
 
@@ -46,59 +62,56 @@ export default {
   name: "AppSidebarComp",
   components: {},
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     //페이지 이동시 모달창이 삭제되지 않고 남아있어 페이지 리로드를 하여 이 부분을 삭제함
-    async goRoomList(){
-      await this.$router.push('roomlist')
-      // window.location.reload()
-      // this.$router.go()
+    async goRoomList() {
+      await this.$router.push("roomlist");
+      // window.location.reload();
+      this.$router.go();
     },
-    logout(){
-      this.$store.commit('logout')
-      this.$router.push('main')
-    }
+    logout() {
+      this.$store.commit("logout");
+      this.$router.push("main");
+    },
   },
   computed: {
-    isLogin(){
-      return this.$store.state.login
+    isLogin() {
+      return this.$store.state.login;
     },
-    welcomeName(){
-      if(this.$store.state.userData.userNickname==null){
-        return "로그인을 해주세요."
+    welcomeName() {
+      if (this.$store.state.userData.userNickname == null) {
+        return "로그인을 해주세요.";
+      } else {
+        return this.$store.state.userData.userNickname + "님 환영합니다!";
       }
-      else{
-        return this.$store.state.userData.userNickname + "님 환영합니다!"
-      }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-.sidebar{
-    background: #bdecb6;
-    box-shadow: 1px 0px 3px 1px gray;
+.sidebar {
+  background: #bdecb6;
+  box-shadow: 1px 0px 3px 1px gray;
 }
-.logo{
+.logo {
   width: 100%;
   margin-bottom: 13px;
   margin-top: 20px;
   padding-left: 0px;
 }
-.roomlistButton button{
+.roomlistButton button {
   width: 240px;
   height: 2.5em;
 }
-.roomlistButton{
+.roomlistButton {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-.sidebarInfo{
-  background: rgba(256,256,256,0.4);
+.sidebarInfo {
+  background: rgba(256, 256, 256, 0.4);
   color: rgba(200, 200, 200, 0.8);
   font-size: 1.6em;
   bottom: 0%;
