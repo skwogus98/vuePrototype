@@ -29,4 +29,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 시군구 정보 데이터
-https://www.city.go.kr/portal/notice/opensys/contents02/link.do
+https://sgis.kostat.go.kr/developer/html/newOpenApi/api/dataApi/addressBoundary.html
