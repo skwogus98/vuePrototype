@@ -276,7 +276,7 @@ export default {
       return this.registerData.password == this.passwordCheck;
     },
     validPw() {
-      if(this.registerData.password == ''){
+      if(this.passwordCheck == ''){
         return null
       }
       return this.registerData.password.length > 7;
