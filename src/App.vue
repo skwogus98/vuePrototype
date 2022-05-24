@@ -26,7 +26,19 @@ export default {
     }
   },
   methods: {
-  }
+    testData(){
+      console.log("mount")
+      this.$store.commit('login', {
+        userNickname: "나재현",
+        userEmail: "zkxmwogus@naver.com",
+        userCash: 30000,
+        chargedCash: null
+        })
+    },
+  },
+  /* mounted(){
+    this.testData()
+  }, */
 }
 </script>
 
@@ -56,6 +68,7 @@ export default {
   position: fixed;
   height: 100%;
   padding: 100px;
+  padding-top: 50px;
   width: calc(100% - 320px);
   overflow: auto
 }
@@ -64,6 +77,7 @@ export default {
   position: fixed;
   height: 100%;
   padding: 100px;
+  padding-top: 50px;
   width: calc(100%);
   overflow: auto
 }

@@ -2,14 +2,39 @@
   <div class="sidebar">
     <b-sidebar id="sidebar-1" title="Sidebar" shadow>
       <!-- <div class="logo"><img src="../assets/premium-icon-food-5134814.png" style="width:100px" @click="$router.push('main')"/></div> -->
-      <div class="roomlistButton"><b-button @click="goRoomList" variant="outline-success">방 찾기</b-button></div>
-      <div class="roomlistButton"><b-button @click="$router.push('createroom')" variant="outline-success">방 만들기</b-button></div>
-      <div class="sidebarFooter">
-        <div class="roomlistButton"><b-button @click="$router.push('login')" variant="outline-success">로그인</b-button></div>
-        <div class="roomlistButton"><b-button @click="$router.push('register')" variant="outline-success">회원가입</b-button></div>
-        <div class="sidebarInfo"><h3>info</h3></div>
+      <div id="LoginSideContent" v-if="isLogin">
+        <div class="roomlistButton">
+          <b-button @click="goRoomList" variant="outline-success">방 찾기</b-button>
+        </div>
+        <div class="roomlistButton">
+          <b-button @click="$router.push('createroom')" variant="outline-success">방 만들기</b-button>
+        </div>
+        <div class="roomlistButton">
+          <b-button @click="$router.push('mypage')" variant="outline-success">마이 페이지</b-button>
+        </div>
+        <div class="roomlistButton">
+          <b-button @click="$router.push('cash')" variant="outline-success">캐시 충전</b-button>
+        </div>
+        <div class="roomlistButton">
+          <b-button @click="logout" variant="danger">로그아웃</b-button>
+        </div>
       </div>
-    </b-sidebar>
+      <div id="NotLoginSideContent" v-else>
+        <div class="roomlistButton">
+          <b-button @click="goRoomList" variant="outline-success">방 찾기</b-button>
+        </div>
+        <div class="roomlistButton" style="visibility: hidden;">
+          <b-button>nothing</b-button>
+        </div>
+        <div class="roomlistButton">
+          <b-button @click="$router.push('login')" variant="outline-success">로그인</b-button>
+        </div>
+        <div class="roomlistButton">
+          <b-button @click="$router.push('register')" variant="outline-success">회원가입</b-button>
+        </div>
+      </div>
+      <div class="sidebarInfo">{{welcomeName}}<h3></h3></div>
+      </b-sidebar>
   </div>
 </template>
 
@@ -27,27 +52,38 @@ export default {
     async goRoomList(){
       await this.$router.push('roomlist')
       window.location.reload()
+    },
+    logout(){
+      this.$store.commit('logout')
+      this.$router.push('main')
     }
   },
+  computed: {
+    isLogin(){
+      return this.$store.state.login
+    },
+    welcomeName(){
+      if(this.$store.state.userData.userNickname==null){
+        return "로그인을 해주세요."
+      }
+      else{
+        return this.$store.state.userData.userNickname + "님 환영합니다!"
+      }
+    }
+  }
 };
 </script>
 
 <style>
 .sidebar{
     background: #bdecb6;
-    box-shadow: 1px 0px 6px 1px gray;
+    box-shadow: 1px 0px 3px 1px gray;
 }
 .logo{
   width: 100%;
   margin-bottom: 13px;
   margin-top: 20px;
   padding-left: 0px;
-}
-.sidebarFooter{
-  width: 100%;
-  bottom:0px;
-  position: absolute;
-  height: 12em;
 }
 .roomlistButton button{
   width: 240px;
@@ -59,7 +95,10 @@ export default {
 }
 .sidebarInfo{
   background: rgba(256,256,256,0.4);
-  height: 5em;
-  color: rgba(200, 200, 200, 0.8)
+  color: rgba(200, 200, 200, 0.8);
+  font-size: 1.6em;
+  bottom: 0%;
+  position: absolute;
+  width: 100%;
 }
 </style>

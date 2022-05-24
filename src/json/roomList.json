@@ -2,46 +2,46 @@
   {
     "id": 1,
     "title": "치킨 먹을 사람 구함",
-    "location": "금오공대 푸름1동",
-    "currentPerson": 2,
-    "maxPerson": 5,
-    "price": 25000,
-    "fundedPrice": 10000
+    "gatheringPlace": "금오공대 푸름1동",
+    "currNumOfPeople": 2,
+    "maximumPeople": 5,
+    "minimumOrderAmount": 25000,
+    "currentAmount": 10000
   },
   {
     "id": 2,
-    "title": "치즈볼 먹을 사람 구함",
-    "location": "금오공대 오름3동",
-    "currentPerson": 3,
-    "maxPerson": 5,
-    "price": 50000,
-    "fundedPrice": 20000
+    "title": "중국집 같이 시켜먹을래요?",
+    "gatheringPlace": "금오공대 푸름3동",
+    "currNumOfPeople": 2,
+    "maximumPeople": 3,
+    "minimumOrderAmount": 15000,
+    "currentAmount": 5000
   },
   {
-    "id": 1,
-    "title": "떡볶이 드실 분",
-    "location": "금오공대 푸름2동",
-    "currentPerson": 2,
-    "maxPerson": 5,
-    "price": 30000,
-    "fundedPrice": 7000
+    "id": 3,
+    "title": "햄버거 먹으실분?",
+    "gatheringPlace": "구미시 옥계동",
+    "currNumOfPeople": 5,
+    "maximumPeople": 10,
+    "minimumOrderAmount": 30000,
+    "currentAmount": 20000
   },
   {
-    "id": 2,
-    "title": "중국집 시키실 분 계신가요",
-    "location": "금오공대 오름1동",
-    "currentPerson": 3,
-    "maxPerson": 5,
-    "price": 20000,
-    "fundedPrice": 15000
+    "id": 4,
+    "title": "카페에서 커피 공동주문 하실분?",
+    "gatheringPlace": "금오공대 오름2동",
+    "currNumOfPeople": 5,
+    "maximumPeople": 10,
+    "minimumOrderAmount": 20000,
+    "currentAmount": 5000
   },
   {
-    "id": 1,
-    "title": "커피",
-    "location": "금오공대 푸름1동",
-    "currentPerson": 2,
-    "maxPerson": 5,
-    "price": 25000,
-    "fundedPrice": 10000
+    "id": 5,
+    "title": "찜닭 먹읍시다",
+    "gatheringPlace": "금오공대 디지털관",
+    "currNumOfPeople": 2,
+    "maximumPeople": 4,
+    "minimumOrderAmount": 20000,
+    "currentAmount": 7000
   }
 ]

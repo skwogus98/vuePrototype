@@ -65,12 +65,12 @@
           :state="checkPw"
         />
         <b-form-invalid-feedback :state="checkPw">
-          비밀번호가 일치하지 않습니다,
+          비밀번호가 일치하지 않습니다.
         </b-form-invalid-feedback>
         <b-form-valid-feedback :state="checkPw" />
       </div>
       <div class="inputBox">
-        <b-button id="something" variant="light" @click="getPhoneCheck"
+        <b-button id="something" variant="light" @click="checkPhoneNumber"
           >인증번호받기</b-button
         >
         <b-form-input
@@ -119,50 +119,123 @@ export default {
   data() {
     return {
       registerData: {
-        email: "",
-        nickname: "",
-        password: "",
-        phoneNum: "",
+        email: "phdljr@naver.com",
+        nickname: "효자이씨",
+        password: "123",
+        phoneNum: "010-4725-5788",
       },
       passwordCheck: "",
-      passwordCheckData: "",
       phoneCheck: "",
-      vailidEmail: false,
-      vailidNickname: false,
-      checkAccept: false,
-      emailChecked: false,
-      nicknameChecked: false,
+      phoneCheckData: "",
+      vailidEmail: null,
+      vailidNickname: null,
+      checkAccept: null,
+      emailChecked: null,
+      nicknameChecked: null,
     };
   },
   components: {},
   methods: {
-    async getPhoneCheck() {
-      let url = "http://127.0.0.1:8081";
+    checkPhoneNumber() {
       axios
-        .post(url + "/phonecheck", this.registerData.phoneNum, {
-          headers: { "Content-Type": `application/json` },
-        })
+        .post(
+          this.HOST + "/sendSMS",
+          { param: this.registerData.phoneNum },
+          {
+            headers: { "Content-Type": `application/json` },
+          }
+        )
         .then((res) => {
           alert(this.registerData.phoneNum + "으로 인증번호를 보냈습니다.");
           this.phoneCheckData = res.data;
+          console.log(res.data);
         });
     },
+    checkEmail() {
+      this.emailChecked = true;
 
-    submitForm() {
-      //alert(this.id + this.password + this.nickname + this.age)
-      var url = "http://117.20.209.64:8080";
-      // var signUpData = {
-      //   user_email: this.user_email,
-      //   user_pw: this.user_pw,
-      //   user_nickname: this.user_nickname,
-      //   user_phoneNum: this.user_phoneNum,
-      // };
+      console.log(this.registerData.email);
       axios
-        .post(url + "/user", this.registerData)
-        .then(function (res) {
-          alert(res);
+        .post(
+          this.HOST + "/email",
+          { param: this.registerData.email },
+          { headers: { "Content-Type": `application/json` } }
+        )
+        .then((res) => {
+          console.log(res);
+          // 이메일이 중복되지 않는다면
+          if (res.data == "NonExist") {
+            this.vailidEmail = true;
+          } else {
+            this.vailidEmail = false;
+          }
         })
-        .catch(function (err) {
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    checkNickname() {
+      this.nicknameChecked = true;
+
+      console.log(this.registerData.nickname);
+      axios
+        .post(
+          this.HOST + "/nickname",
+          { param: this.registerData.nickname },
+          { headers: { "Content-Type": `application/json` } }
+        )
+        .then((res) => {
+          console.log(res);
+          // 닉네임이 중복되지 않는다면
+          if (res.data == "NonExist") {
+            this.vailidNickname = true;
+          } else {
+            this.vailidNickname = false;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    submitForm() {
+      // 이메일 중복 체크
+      if (this.vailidEmail == false) {
+        alert("이메일을 다시 확인해주세요.");
+        return;
+      }
+      // 닉네임 중복 체크
+      if (this.vailidNickname == false) {
+        alert("닉네임을 다시 확인해주세요.");
+        return;
+      }
+      // 휴대폰 인증번호 체크
+      if (this.phoneCheck == null) {
+        alert("휴대폰 인증 번호를 입력해 주세요.");
+        return;
+      } else {
+        if (this.phoneCheck != this.phoneCheckData) {
+          alert("휴대폰 인증 번호가 일치하지 않습니다.");
+          return;
+        }
+      }
+
+      let data = {
+        user_email: this.registerData.email,
+        user_pw: this.registerData.password,
+        user_nickname: this.registerData.nickname,
+        user_phoneNumber: this.registerData.phoneNum,
+      };
+      console.log(data);
+      axios
+        .post(this.HOST + "/user", data, {
+          headers: { "Content-Type": `application/json` },
+        })
+        .then(() => {
+          alert("회원가입이 정상적으로 이루어졌습니다!");
+          //로그인 창으로 라우팅
+          this.$router.push("login");
+        })
+        .catch((err) => {
           alert(err);
         });
     },
@@ -194,27 +267,18 @@ export default {
       }
       document.getElementById("phone").value = phone;
     },
-    checkEmail() {
-      this.registerData.email;
-      this.emailChecked = true;
-      //Get method
-      this.vailidEmail = true;
-      //
-    },
-    checkNickname() {
-      this.registerData.nickname;
-      //this.registerData.nickname;
-      this.nicknameChecked = true;
-      //Get method
-      this.vailidNickname = true;
-      //
-    },
   },
   computed: {
     checkPw() {
+      if(this.registerData.password == ''){
+        return null
+      }
       return this.registerData.password == this.passwordCheck;
     },
     validPw() {
+      if(this.passwordCheck == ''){
+        return null
+      }
       return this.registerData.password.length > 7;
     },
   },
@@ -238,6 +302,7 @@ div {
 .signUpBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(180, 180, 180);
   margin: auto;
   border-radius: 8px;
   margin-top: 0px;

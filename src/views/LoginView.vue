@@ -4,16 +4,16 @@
       <img src="../assets/logo.png" width="100px" />
     </div>
 
-    <b-form class="login">
+    <b-form class="login" @submit="login">
       <div class="inputBox">
-        id
-        <b-form-input type="text" v-model="id" />
+        email
+        <b-form-input type="text" v-model="email" />
       </div>
       <div class="inputBox">
         pw
         <b-form-input type="password" v-model="password" />
       </div>
-      <b-button id="loginButton" @click="successLogin"> 로그인 </b-button>
+      <b-button id="loginButton" type="submit"> 로그인 </b-button>
     </b-form>
 
     <div class="signIn">
@@ -24,19 +24,54 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "LoginView",
-  props: {},
   data() {
     return {
-      id: "",
+      email: "",
       password: "",
     };
   },
   components: {},
   methods: {
-    successLogin: function () {
-      //alert("hi")
+    login(){
+      //api로 데이터 저장 필요
+      let data = {
+        user_email: this.email,
+        user_pw: this.password
+      }
+      console.log("로그인 시도")
+      axios.post(this.HOST+"/login", data)
+        .then(res=>{
+          if(res.data == 'WrongPassword' || res.data == 'InvalidEmail'){
+            alert("다시 입력하세요.")
+          }
+          // Success가 온다면
+          else if(res.data == 'Success'){
+            console.log("success가 왔음")
+            axios.post(this.HOST+'/loginSuccess', {user_email: this.email}, {headers: { "Content-Type": `application/json` }}).then(res=>{
+              this.$store.commit('login', {
+                userNickname: res.data.nickname,
+                userEmail: this.email,
+                userCash: res.data.cash,
+                chargedCash: null
+              })
+              // console.log(this.$store.state.userData.userEmail)
+              this.$router.push('/roomList')
+            }).catch(err=>{
+              console.log(err)
+            })
+            // this.$store.state.userData = res.data.
+          }
+        }).catch(err=>{
+          console.log(err)
+        })
+      // this.$store.commit('login', {
+      //   userName:this.id
+      // })
+      // console.log(this.$store.state.userData.userName)
+      // this.$router.push('/roomList')
     },
   },
 };
@@ -49,6 +84,7 @@ div {
 .loginBg {
   width: 768px;
   background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(180,180,180);
   margin: auto;
   border-radius: 8px;
   margin-top: 0px;
