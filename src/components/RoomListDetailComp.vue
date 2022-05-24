@@ -101,26 +101,6 @@ export default {
             },
           ],
         },
-        {
-          userName: "이종렬",
-          menu: [
-            {
-              menuName: "아이스티",
-              price: 1500,
-              menuCount: 1,
-            },
-            {
-              menuName: "청포도 에이드",
-              price: 2500,
-              menuCount: 2,
-            },
-            {
-              menuName: "딸기 케이크",
-              price: 6000,
-              menuCount: 4,
-            },
-          ],
-        },
       ],
     };
   },
