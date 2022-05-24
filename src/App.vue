@@ -26,7 +26,19 @@ export default {
     }
   },
   methods: {
-  }
+    testData(){
+      console.log("mount")
+      this.$store.commit('login', {
+        userNickname: "나재현",
+        userEmail: "zkxmwogus@naver.com",
+        userCash: 30000,
+        chargedCash: null
+        })
+    },
+  },
+  mounted(){
+    this.testData()
+  },
 }
 </script>
 

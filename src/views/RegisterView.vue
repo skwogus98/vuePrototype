@@ -127,11 +127,11 @@ export default {
       passwordCheck: "",
       phoneCheck: "",
       phoneCheckData: "",
-      vailidEmail: false,
-      vailidNickname: false,
-      checkAccept: false,
-      emailChecked: false,
-      nicknameChecked: false,
+      vailidEmail: null,
+      vailidNickname: null,
+      checkAccept: null,
+      emailChecked: null,
+      nicknameChecked: null,
     };
   },
   components: {},
@@ -270,9 +270,15 @@ export default {
   },
   computed: {
     checkPw() {
+      if(this.registerData.password == ''){
+        return null
+      }
       return this.registerData.password == this.passwordCheck;
     },
     validPw() {
+      if(this.registerData.password == ''){
+        return null
+      }
       return this.registerData.password.length > 7;
     },
   },

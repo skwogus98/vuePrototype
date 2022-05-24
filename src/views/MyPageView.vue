@@ -6,11 +6,11 @@
     <div class="UserDataDiv">
       <b-form>
         <p>이메일</p>
-        <b-form-input v-bind:value="$store.state.userData.userEmail" readonly></b-form-input>
+        <b-form-input id="EmailInput" readonly></b-form-input>
       </b-form>
       <b-form>
         <p>닉네임</p>
-        <b-form-input v-bind:value="$store.state.userData.userNickname"></b-form-input>
+        <b-form-input id="NicknameInput"></b-form-input>
         <b-button>변경</b-button>
       </b-form>
       <b-form>
@@ -38,19 +38,20 @@ export default {
     };
   },
   methods: {
-    testData(){
-      this.$store.commit('login', {
-        userNickname: "나재현",
-        userEmail: "zkxmwogus@naver.com",
-        userCash: 30000,
-        chargedCash: null
-        })
+    
+  },
+  computed:{
+    showEmail(){
+      return this.$store.state.userData.userEmail
+    },
+    showNickname(){
+      return this.$store.state.userData.userNickname
     }
   },
   mounted(){
-    this.testData()
-  },
-  computed:{
+    document.getElementById("EmailInput").value = this.showEmail
+    console.log(this.showNickname)
+    document.getElementById("NicknameInput").value = this.showNickname
   }
 };
 </script>

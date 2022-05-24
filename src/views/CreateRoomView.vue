@@ -12,7 +12,7 @@
                 <b-form-input id="person" placeholder="인원 수" type="number" v-model="RoomData.person"></b-form-input>
             </b-form-group>
             <b-form-group class="submitButton">
-                <b-button type="submit" variant="primary">방만들기</b-button>
+                <b-button type="submit" variant="primary">방 만들기</b-button>
             </b-form-group>      
       </b-form>
       <div ref="embed"></div>
