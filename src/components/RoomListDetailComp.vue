@@ -42,6 +42,11 @@
             <p v-else>X</p>
           </td>
         </tr>
+        <div class="chatButton">
+          <b-button>
+          <b-icon icon="chat-dots" size="3x"/>
+        </b-button>
+        </div>
       </table>
     </div>
     <div class="orderButton">
@@ -123,7 +128,9 @@ export default {
 }
 .roomDetailRight {
   width: 20%;
+  height: 500px;
   float: right;
+  position: relative;
 }
 .userTable tr {
   height: 45px;
@@ -144,5 +151,10 @@ export default {
 }
 #menuSelect {
   margin-top: 0.5em;
+}
+.chatButton{
+  position: absolute;
+  bottom: 0;
+  right: 0%;
 }
 </style>
