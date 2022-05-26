@@ -2,7 +2,10 @@
   <b-modal id="chatModal" title="채팅" scrollable>
     <div class="ChatLog">
       <div class="">
-        <div class="chatBox">
+        <div class="OpponentchatBox">
+          <div class="OpponentInfo">
+            이종렬
+          </div>
           <div class="OpponentChat">
             <p>하이</p>
           </div>
@@ -11,7 +14,7 @@
           </div>
         </div>
         
-        <div class="chatBox">
+        <div class="OpponentchatBox">
           <div class="OpponentInfo">
             이종렬
           </div>
@@ -24,7 +27,7 @@
         </div>
 
 
-        <div class="chatBox">
+        <div class="MychatBox">
           <div class="MyChat">
             <p>하이</p>
           </div>
@@ -33,7 +36,7 @@
           </div>
         </div>
         
-        <div class="chatBox">
+        <div class="MychatBox">
           <div class="MyChat">
             <p>동해물과백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세</p>
           </div>
@@ -41,7 +44,7 @@
             5/27 13:00
           </div>
         </div>
-        <div class="chatBox">
+        <div class="MychatBox">
           <div class="MyChat">
             <p>하이</p>
           </div>
@@ -50,14 +53,14 @@
           </div>
         </div>
         
-        <div class="chatBox">
+        <div class="MychatBox">
           <div class="MyChat">
             <p>동해물과백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세</p>
           </div>
           <div class="ChatTime">
             5/27 13:00
           </div>
-        </div><div class="chatBox">
+        </div><div class="MychatBox">
           <div class="MyChat">
             <p>하이</p>
           </div>
@@ -66,7 +69,7 @@
           </div>
         </div>
         
-        <div class="chatBox">
+        <div class="MychatBox">
           <div class="MyChat">
             <p>동해물과백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세</p>
           </div>
@@ -99,6 +102,12 @@ export default {
 <style>
 .ChatLog{
   max-height: 100%;
+}
+.OpponentchatBox{
+  text-align: left;
+}
+.MychatBox{
+  text-align: right;
 }
 .MyChat{
   border-radius: 0.7em;
@@ -135,6 +144,7 @@ export default {
 .ChatTime{
   clear:both;
   margin-bottom: 1em;
+  font-size: 0.7em;
 }
 .ChatForm{
   position: absolute;
