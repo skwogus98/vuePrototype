@@ -36,9 +36,9 @@ export default {
         })
     },
   },
-  /* mounted(){
+  mounted(){
     this.testData()
-  }, */
+  }, 
 }
 </script>
 

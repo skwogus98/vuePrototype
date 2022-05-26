@@ -43,9 +43,9 @@
           </td>
         </tr>
         <div class="chatButton">
-          <b-button>
-          <b-icon icon="chat-dots" size="3x"/>
-        </b-button>
+          <b-button @click="showChatModal">
+            <b-icon icon="chat-dots" size="3x"/>
+          </b-button>
         </div>
       </table>
     </div>
@@ -53,18 +53,21 @@
       <b-button @click="order()">주문하기</b-button>
     </div>
     <room-list-menu-comp-vue ref="menuModal"></room-list-menu-comp-vue>
+    <chat-comp/>
   </b-modal>
 </template>
 
 <script>
 import roomDetail from "../json/roomDetail.json";
 import RoomListMenuCompVue from "./RoomListMenuComp.vue";
+import ChatComp from "./ChatComp.vue"
 
 export default {
   name: "RoomListDetailComp",
   props: ["roomId"],
   components: {
     RoomListMenuCompVue,
+    ChatComp
   },
   data() {
     return {
@@ -116,6 +119,9 @@ export default {
       this.$refs.menuModal.setMenu(userMenu);
       this.$bvModal.show("MenuModal");
     },
+    showChatModal(){
+      this.$bvModal.show("chatModal")
+    }
   },
 };
 </script>
