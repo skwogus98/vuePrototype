@@ -28,7 +28,7 @@
       <b-button id="menuSelect" @click="openMenu(selectedMenu[0]['menu'])"
         >메뉴선택</b-button
       >
-      <h3 style="margin-top: 30px">주문 금액: 45,000원</h3>
+      <h3 style="margin-top: 30px">주문 금액: {{roomDetail.fundedPrice}}원</h3>
     </div>
     <div class="roomDetailRight">
       <table class="userTable">
@@ -52,26 +52,26 @@
     <div class="orderButton">
       <b-button @click="order()">주문하기</b-button>
     </div>
-    <room-list-menu-comp-vue ref="menuModal"></room-list-menu-comp-vue>
-    <chat-comp/>
+    <room-list-menu-comp-vue ref="menuModal" :clientSocket="clientSocket"></room-list-menu-comp-vue>
+    <room-list-chat-comp ref="chatModal"/>
   </b-modal>
 </template>
 
 <script>
 import roomDetail from "../json/roomDetail.json";
 import RoomListMenuCompVue from "./RoomListMenuComp.vue";
-import ChatComp from "./ChatComp.vue"
+import RoomListChatComp from "./RoomListChatComp.vue"
 
 export default {
   name: "RoomListDetailComp",
   props: ["roomId"],
   components: {
     RoomListMenuCompVue,
-    ChatComp
+    RoomListChatComp
   },
   data() {
     return {
-      clientSocket: null,
+      clientSocket: "testSocket",
       roomDetail: roomDetail,
       selectedMenu: [
         {
@@ -124,7 +124,11 @@ export default {
       this.$bvModal.show("chatModal")
     },
     onConnectSocket(){
-      console.log("방 세부정보 created 출력")
+      console.log("방 입장 시, 소캣 연결할 함수 호출", this.clientSocket)
+    },
+    getDetailRoomInfo(roomInfo){
+      console.log("방 세부정보 가져오기", roomInfo)
+      this.roomDetail = roomInfo
     }
   },
 };

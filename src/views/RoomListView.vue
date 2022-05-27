@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       roomData: roomList,
-      roomId: 1,
+      roomId: null,
       roomLimit: 0,
       showMoreBtn: true,
       searchText:""
@@ -61,9 +61,22 @@ export default {
   },
   methods: {
     enterRoom(room) {
-      this.$bvModal.show('roomDetailModal')
-      this.roomId = Number(room.id)
-      this.$refs.detailRoom.onConnectSocket()
+      //////////////
+      axios.post(this.HOST+"/joinRoom", 
+        {
+          username: this.$store.state.userData.userNickname,
+          roomTitle: room.title
+        })
+        .then(res=>{
+          console.log(res)
+          this.$refs.detailRoom.getDetailRoomInfo(res.data)
+          this.$bvModal.show('roomDetailModal')
+          this.roomId = Number(res.data.id)
+          this.$refs.detailRoom.onConnectSocket()
+        }).catch(err=>{
+          console.log(err)
+        })
+      //////////////
       //console.log(this.roomId)
     },
     openMapModal(addr){
@@ -74,6 +87,7 @@ export default {
       this.roomLimit += 5
       axios.get(this.HOST+"/room/" + this.roomLimit).then(res=>{
         this.roomData = res.data
+        // console.log(res.data)
         // console.log("roomLimit: " + this.roomLimit + ", length: " + res.data.length)
         if(this.roomLimit > res.data.length){
           this.showMoreBtn = false
