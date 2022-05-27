@@ -121,17 +121,17 @@ table{
 }
 .searchBox{
   width: 100%;
-  height: 6em;
+  height: 5em;
   margin-bottom: 3em;
 }
 .searchBox input{
-  width: calc(100% - 200px);
+  width: calc(100% - 120px);
   height: 100%;
   font-size: 2em;
   float: left;
 }
 .searchBox button{
-  width: 200px;
+  width: 120px;
   height: 100%;
   font-size: 2em;
   float: left;

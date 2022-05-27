@@ -79,11 +79,6 @@
         </div>
       </div>
     </div>
-    <template #modal-footer>
-      <div class="btn-wrap">
-        <button type="button" class="btn" @click="confirm"></button>
-      </div>
-    </template>
   </b-modal>
 </template>
 
@@ -98,14 +93,23 @@ export default {
   methods: {
     sendMsg(){
       const msg = document.getElementById("MsgInput").value
-      console.log(msg)
-      console.log("send");
+      if(msg != '\n' || msg != ''){
+        console.log(msg)
+        console.log("send");
+      }
+      document.getElementById("MsgInput").value = ''
+    },
+    pressEnter(e){
+      if(e.keyCode == 13 && !e.shiftKey){
+        this.sendMsg()        
+      }
     }
   },
   mounted(){
     const footerHtml = '<div class="MsgSender"><textarea id="MsgInput" rows="3"></textarea><button type="button" id="MsgSendButton" class="btn btn-success">전송</button></div>'
     document.getElementById("chatModal").getElementsByClassName("modal-footer")[0].innerHTML = footerHtml
     document.getElementById("MsgSendButton").onclick = this.sendMsg
+    document.getElementById("MsgInput").onkeypress = this.pressEnter
   }
 };
 </script>
