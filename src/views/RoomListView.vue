@@ -30,7 +30,7 @@
     </table>
   </div>
   <b-button @click="getRoomList" v-if="showMoreBtn">더보기</b-button>
-  <room-list-detail-comp :roomId="roomId"/>
+  <room-list-detail-comp :roomId="roomId" ref="detailRoom"/>
   <b-modal id="MapModal" hide-footer title="위치">
     <kakao-map-comp-vue ref="createMap"></kakao-map-comp-vue>
   </b-modal>
@@ -63,6 +63,7 @@ export default {
     enterRoom(room) {
       this.$bvModal.show('roomDetailModal')
       this.roomId = Number(room.id)
+      this.$refs.detailRoom.onConnectSocket()
       //console.log(this.roomId)
     },
     openMapModal(addr){

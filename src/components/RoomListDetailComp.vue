@@ -20,7 +20,7 @@
               v-for="(menu, menuNum) in user['menu']"
             >
               {{ menu["menuName"] }} : {{ menu["price"] }}원
-              <b-badge variant="success" pill>{{ menu["menuCount"] }}</b-badge>
+              <b-badge variant="success" pill>{{ menu["quantity"] }}</b-badge>
             </b-list-group-item>
           </b-list-group-item>
         </b-list-group>
@@ -71,6 +71,7 @@ export default {
   },
   data() {
     return {
+      clientSocket: null,
       roomDetail: roomDetail,
       selectedMenu: [
         {
@@ -79,35 +80,35 @@ export default {
             {
               menuName: "아메리카노",
               price: 2000,
-              menuCount: 2,
+              quantity: 2,
             },
             {
               menuName: "크로플",
               price: 3500,
-              menuCount: 3,
+              quantity: 3,
             },
           ],
         },
-        {
-          userName: "이종렬",
-          menu: [
-            {
-              menuName: "아이스티",
-              price: 1500,
-              menuCount: 1,
-            },
-            {
-              menuName: "청포도 에이드",
-              price: 2500,
-              menuCount: 2,
-            },
-            {
-              menuName: "딸기 케이크",
-              price: 6000,
-              menuCount: 4,
-            },
-          ],
-        },
+        // {
+        //   userName: "이종렬",
+        //   menu: [
+        //     {
+        //       menuName: "아이스티",
+        //       price: 1500,
+        //       menuCount: 1,
+        //     },
+        //     {
+        //       menuName: "청포도 에이드",
+        //       price: 2500,
+        //       menuCount: 2,
+        //     },
+        //     {
+        //       menuName: "딸기 케이크",
+        //       price: 6000,
+        //       menuCount: 4,
+        //     },
+        //   ],
+        // },
       ],
     };
   },
@@ -121,6 +122,9 @@ export default {
     },
     showChatModal(){
       this.$bvModal.show("chatModal")
+    },
+    onConnectSocket(){
+      console.log("방 세부정보 created 출력")
     }
   },
 };
