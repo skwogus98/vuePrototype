@@ -68,11 +68,13 @@ export default {
           roomTitle: room.title
         })
         .then(res=>{
-          console.log(res)
-          this.$refs.detailRoom.getDetailRoomInfo(res.data)
+          console.log("joinRoom 응답", res)
+          this.$refs.detailRoom.setDetailRoomInfo(res.data)
           this.$bvModal.show('roomDetailModal')
-          this.roomId = Number(res.data.id)
-          this.$refs.detailRoom.onConnectSocket()
+          this.roomId = Number(res.data.roomId)
+          this.$store.commit('enterRoom', this.roomId)
+          // console.log("방 입장", this.$store.state.userData.enterRoomId)
+          this.$refs.detailRoom.subscribeRoom()
         }).catch(err=>{
           console.log(err)
         })
