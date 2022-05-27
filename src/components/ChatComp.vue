@@ -95,7 +95,18 @@ export default {
     return {
     };
   },
-  methods: {},
+  methods: {
+    sendMsg(){
+      const msg = document.getElementById("MsgInput").value
+      console.log(msg)
+      console.log("send");
+    }
+  },
+  mounted(){
+    const footerHtml = '<div class="MsgSender"><textarea id="MsgInput" rows="3"></textarea><button type="button" id="MsgSendButton" class="btn btn-success">전송</button></div>'
+    document.getElementById("chatModal").getElementsByClassName("modal-footer")[0].innerHTML = footerHtml
+    document.getElementById("MsgSendButton").onclick = this.sendMsg
+  }
 };
 </script>
 
@@ -146,8 +157,19 @@ export default {
   margin-bottom: 1em;
   font-size: 0.7em;
 }
-.ChatForm{
-  position: absolute;
-  bottom: 0%;
+.MsgSender{
+  width: 100%;
+  height: 5em;
+}
+.MsgSender textarea{
+  width: calc(100% - 5em);
+  resize: none;
+  overflow: auto;
+  height: 100%;
+}
+.MsgSender button{
+  width: 4.5em;
+  height: 100%;
+  float: right;
 }
 </style>
