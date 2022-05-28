@@ -13,6 +13,11 @@ export default {
     return{
     }
   },
+  methods:{
+    getCityData(){
+
+    }
+  },
   mounted(){
     console.log("mounted 실행")
     let token = this.$route.query.pg_token
