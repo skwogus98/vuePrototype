@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
       userCash: 20000,
       chargedCash: 0,
     },
+    sgisAccessToken: ''
   },
   mutations: {
     login(state, userData) {
@@ -29,6 +30,9 @@ export const store = new Vuex.Store({
       state.userData.userCash += chargedCash;
       state.userData.chargedCash = chargedCash;
     },
+    setSgisAccessToken(state, token){
+      state.sgisAccessToken = token
+    }
   },
   plugins: [createPersistedState()], //vuex 데이터 지속
 });

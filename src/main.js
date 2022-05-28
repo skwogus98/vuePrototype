@@ -4,7 +4,7 @@ import router from './js/router'
 import { BootstrapVue3 } from 'bootstrap-vue-3'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
-import { store } from './store/user'
+import { store } from './store/store'
 import BootstrapIcon from '@dvuckovic/vue3-bootstrap-icons';
 import dotenv from 'dotenv';
 

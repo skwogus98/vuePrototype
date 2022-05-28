@@ -14,9 +14,6 @@ export default {
     }
   },
   methods:{
-    getCityData(){
-
-    }
   },
   mounted(){
     console.log("mounted 실행")
