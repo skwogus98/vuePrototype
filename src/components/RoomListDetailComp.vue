@@ -16,7 +16,7 @@
           <b-list-group-item
             variant="light"
             :key="nickname"
-            v-for="(menu, nickname) in roomDetail.userMenus"
+            v-for="(menus, nickname) in roomDetail.userMenus"
           >
             <!-- asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
             <p>{{ nickname }}</p>
@@ -24,7 +24,7 @@
               class="MenuDetail"
               variant="info"
               :key="menuNum"
-              v-for="(menu, menuNum) in menu"
+              v-for="(menu, menuNum) in menus"
             >
               {{ menu["menuName"] }} : {{ menu["price"] }}원
               <b-badge variant="success" pill>{{ menu["quantity"] }}</b-badge>
@@ -32,7 +32,13 @@
           </b-list-group-item>
         </b-list-group>
       </div>
-      <b-button id="menuSelect" @click="openMenu(selectedMenu[0]['menu'])"
+      <b-button
+        id="menuSelect"
+        @click="
+          openMenu(
+            roomDetail.userMenus[this.$store.state.userData.userNickname]
+          )
+        "
         >메뉴선택</b-button
       >
       <h3 style="margin-top: 30px">주문 금액: {{ roomDetail.currAmount }}원</h3>
@@ -82,51 +88,13 @@ export default {
         roomId: "",
         title: "",
         gatheringPlace: "",
-        // location: "",
         currNumOfPeople: 0,
         maximumPeople: 0,
         minimumOrderAmount: 0,
         currAmount: 0,
         createdBy: "",
-        // userState:[]
+        userMenus: {},
       },
-      // selectedMenu: [
-      // {
-      //   userName: "나재현",
-      //   menu: [
-      //     {
-      //       menuName: "아메리카노",
-      //       price: 2000,
-      //       quantity: 2,
-      //     },
-      //     {
-      //       menuName: "크로플",
-      //       price: 3500,
-      //       quantity: 3,
-      //     },
-      //   ],
-      // },
-      // {
-      //   userName: "이종렬",
-      //   menu: [
-      //     {
-      //       menuName: "아이스티",
-      //       price: 1500,
-      //       menuCount: 1,
-      //     },
-      //     {
-      //       menuName: "청포도 에이드",
-      //       price: 2500,
-      //       menuCount: 2,
-      //     },
-      //     {
-      //       menuName: "딸기 케이크",
-      //       price: 6000,
-      //       menuCount: 4,
-      //     },
-      //   ],
-      // },
-      // ],
     };
   },
   methods: {
@@ -157,7 +125,11 @@ export default {
       this.$store.state.stompSocket.subscribe(
         "/room/" + this.roomDetail.roomId,
         (res) => {
-          console.log(res);
+          console.log("메뉴 데이터 받음");
+          let menuData = JSON.parse(res.body);
+          let userNickname = menuData["username"];
+          let userMenu = menuData["menus"];
+          this.roomDetail.userMenus[userNickname] = userMenu;
         }
       );
     },
@@ -166,13 +138,12 @@ export default {
       this.roomDetail = roomInfo;
       // console.log("유저 메뉴", this.roomDetail.userMenus)
     },
-
     // 방 모달창이 꺼졌을 때, 실행되는 함수
     exitRoom() {
       console.log("exitRoom");
       // 소캣 subscribe한거 끊기 코드 추가해두기
       /*
-      
+
       */
     },
   },
