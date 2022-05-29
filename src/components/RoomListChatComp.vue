@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="chatModal" @hidden="exitRoom" title="채팅" scrollable>
+  <b-modal id="chatModal" title="채팅" scrollable>
     <div class="ChatLog">
       <div
         :key="key"
@@ -88,9 +88,6 @@ export default {
         this.sendMsg();
       }
     },
-    exitRoom(){
-      console.log("exitRoom")
-    }
   },
   mounted() {
     const footerHtml =
