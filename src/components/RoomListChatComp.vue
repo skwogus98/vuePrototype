@@ -1,10 +1,9 @@
 <template>
   <b-modal id="chatModal" title="채팅" scrollable>
     <div class="ChatLog">
-      <h3>{{ receivedChatData }}</h3>
       <div
         :key="key"
-        v-for="(chat, key) in roomData"
+        v-for="(chat, key) in receivedChatData"
         :class="
           chat.sender == $store.state.userData.userNickname
             ? 'MychatBox'
@@ -108,9 +107,11 @@ export default {
 }
 .OpponentchatBox {
   text-align: left;
+  clear: both;
 }
 .MychatBox {
   text-align: right;
+  clear: both;
 }
 .MyChat {
   border-radius: 0.7em;
