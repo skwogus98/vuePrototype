@@ -1,5 +1,11 @@
 <template>
-  <b-modal id="roomDetailModal" hide-footer size="xl" :title="roomDetail.title">
+  <b-modal
+    id="roomDetailModal"
+    hide-footer
+    size="xl"
+    :title="roomDetail.title"
+    @hidden="exitRoom"
+  >
     <div class="roomDetailLeft">
       <div class="RoomDetailPlace">
         <h3 style="margin-bottom: 30px">{{ roomDetail.gatheringPlace }}</h3>
@@ -10,15 +16,15 @@
           <b-list-group-item
             variant="light"
             :key="nickname"
-            v-for="(menu, nickname) in roomDetail.userMenus"
+            v-for="(menus, nickname) in roomDetail.userMenus"
           >
-          <!-- asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+            <!-- asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
             <p>{{ nickname }}</p>
             <b-list-group-item
               class="MenuDetail"
               variant="info"
               :key="menuNum"
-              v-for="(menu, menuNum) in menu"
+              v-for="(menu, menuNum) in menus"
             >
               {{ menu["menuName"] }} : {{ menu["price"] }}원
               <b-badge variant="success" pill>{{ menu["quantity"] }}</b-badge>
@@ -26,10 +32,16 @@
           </b-list-group-item>
         </b-list-group>
       </div>
-      <b-button id="menuSelect" @click="openMenu(selectedMenu[0]['menu'])"
+      <b-button
+        id="menuSelect"
+        @click="
+          openMenu(
+            roomDetail.userMenus[this.$store.state.userData.userNickname]
+          )
+        "
         >메뉴선택</b-button
       >
-      <h3 style="margin-top: 30px">주문 금액: {{roomDetail.currAmount}}원</h3>
+      <h3 style="margin-top: 30px">주문 금액: {{ roomDetail.currAmount }}원</h3>
     </div>
     <div class="roomDetailRight">
       <table class="userTable">
@@ -45,7 +57,7 @@
         </tr>
         <div class="chatButton">
           <b-button @click="showChatModal">
-            <b-icon icon="chat-dots" size="3x"/>
+            <b-icon icon="chat-dots" size="3x" />
           </b-button>
         </div>
       </table>
@@ -53,22 +65,23 @@
     <div class="orderButton">
       <b-button @click="order()">주문하기</b-button>
     </div>
-    <room-list-menu-comp ref="menuModal"/>
-    <room-list-chat-comp ref="chatModal"/>
+    <room-list-menu-comp-vue ref="menuModal"></room-list-menu-comp-vue>
+    <room-list-chat-comp ref="chatModal" />
   </b-modal>
 </template>
 
 <script>
 // import roomDetail from "../json/roomDetail.json";
-import RoomListMenuComp from "./RoomListMenuComp.vue";
-import RoomListChatComp from "./RoomListChatComp.vue"
+import RoomListMenuCompVue from "./RoomListMenuComp.vue";
+import RoomListChatComp from "./RoomListChatComp.vue";
+import axios from "axios"
 
 export default {
   name: "RoomListDetailComp",
   props: ["roomId"],
   components: {
-    RoomListMenuComp,
-    RoomListChatComp
+    RoomListMenuCompVue,
+    RoomListChatComp,
   },
   data() {
     return {
@@ -76,52 +89,15 @@ export default {
         roomId: "",
         title: "",
         gatheringPlace: "",
-        // location: "",
         currNumOfPeople: 0,
         maximumPeople: 0,
         minimumOrderAmount: 0,
         currAmount: 0,
         createdBy: "",
-        userMenus: [],
-        // userState:[]
+        userMenus: {
+          //김민수: {menuName: 'AA', price: 5000, quantity: 2}
+        },
       },
-      selectedMenu: [
-        {
-          userName: "나재현",
-          menus: [
-            {
-              menuName: "아메리카노",
-              price: 2000,
-              quantity: 2,
-            },
-            {
-              menuName: "크로플",
-              price: 3500,
-              quantity: 3,
-            },
-          ],
-        },
-        {
-          userName: "이종렬",
-          menu: [
-            {
-              menuName: "아이스티",
-              price: 1500,
-              menuCount: 1,
-            },
-            {
-              menuName: "청포도 에이드",
-              price: 2500,
-              menuCount: 2,
-            },
-            {
-              menuName: "딸기 케이크",
-              price: 6000,
-              menuCount: 4,
-            },
-          ],
-        },
-      ],
     };
   },
   methods: {
@@ -135,27 +111,63 @@ export default {
       this.$refs.menuModal.setMenu(userMenu);
       this.$bvModal.show("MenuModal");
     },
-    showChatModal(){
-      this.$bvModal.show("chatModal")
+    showChatModal() {
+      this.$bvModal.show("chatModal");
     },
-    subscribeRoom(){
-      console.log("방 입장 시, 구독 함수 호출")
-      this.$store.state.stompSocket.subscribe("/chat/receive/"+this.roomDetail.roomId, res=>{
-        // 서버로부터 채팅 내용을 res에 담아서 받아옴
-        // console.log(res)
-        let message = JSON.parse(res.body)
-        if(message.sender !== this.$store.state.userData.userNickname)
-          this.$refs.chatModal.receivedcMsg(JSON.parse(res.body))
-      })
-      this.$store.state.stompSocket.subscribe("/room/"+this.roomDetail.roomId, res=>{
-        console.log(res)
-      })
+    subscribeRoom() {
+      console.log("방 입장 시, chat 구독 함수 호출");
+      this.$store.state.subscribeList.chat =
+        this.$store.state.stompSocket.subscribe(
+          "/chat/receive/" + this.roomDetail.roomId,
+          (res) => {
+            // 서버로부터 채팅 내용을 res에 담아서 받아옴
+            // console.log(res)
+            let message = JSON.parse(res.body);
+            // if(message.sender !== this.$store.state.userData.userNickname)
+            this.$refs.chatModal.receivedcMsg(message);
+          }
+        );
+
+      console.log("방 입장 시, room 구독 함수 호출");
+      this.$store.state.subscribeList.room =
+        this.$store.state.stompSocket.subscribe(
+          "/room/" + this.roomDetail.roomId,
+          (res) => {
+            console.log("메뉴 데이터 받음");
+            let menuData = JSON.parse(res.body);
+            this.roomDetail.currNumOfPeople = menuData.currNumOfPeople
+            this.roomDetail.currAmount = menuData.currAmount
+            this.roomDetail.userMenus = menuData.userMenus
+            // let userNickname = menuData["username"];
+            // let userMenu = menuData["menus"];
+            // let currAmount = menuData["currAmount"];
+            // this.roomDetail.userMenus[userNickname] = userMenu;
+            // this.roomDetail.currAmount = currAmount;
+            // this.roomDetail = menuData;
+          }
+        );
     },
-    setDetailRoomInfo(roomInfo){
-      console.log("방 세부정보 가져오기", roomInfo)
-      this.roomDetail = roomInfo
+    setDetailRoomInfo(roomInfo) {
+      console.log("방 세부정보 가져오기", roomInfo);
+      this.roomDetail = roomInfo;
       // console.log("유저 메뉴", this.roomDetail.userMenus)
-    }
+    },
+    // 방 모달창이 꺼졌을 때, 실행되는 함수
+    exitRoom() {
+      console.log("exitRoom");
+      // 방에 나가면 해당 방의 메뉴에 내 메뉴를 제외시킴
+      axios
+        .post(this.HOST + "/room/exit", {
+          param: this.$store.state.userData.userNickname,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // 소캣 subscribe한거 끊기 (connect를 끊는게 아님)
+      this.$store.state.subscribeList.room.unsubscribe();
+      this.$store.state.subscribeList.chat.unsubscribe();
+    },
   },
 };
 </script>
@@ -192,7 +204,7 @@ export default {
 #menuSelect {
   margin-top: 0.5em;
 }
-.chatButton{
+.chatButton {
   position: absolute;
   bottom: 0;
   right: 0%;
