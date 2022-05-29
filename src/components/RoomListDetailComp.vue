@@ -164,9 +164,12 @@ export default {
       this.roomDetail = roomInfo;
       // console.log("유저 메뉴", this.roomDetail.userMenus)
     },
-  },
-  exitRoom() {
-    console.log("exitRoom");
+
+    // 방 모달창이 꺼졌을 때, 실행되는 함수
+    exitRoom() {
+      console.log("exitRoom");
+      // 소캣 subscribe한거 끊기 코드 추가해두기
+    },
   },
 };
 </script>
