@@ -1,6 +1,5 @@
 module.exports = {
-  outputDir:
-    "C://Users//phdlj//Desktop//GraduationWork//src//main//resources//static",
+  outputDir: "..//GraduationWork//src//main//resources//static",
   // outputDir:
   //   // "C://Users//phdlj//Desktop//GraduationWork//src//main//resources//templates",
   devServer: {
