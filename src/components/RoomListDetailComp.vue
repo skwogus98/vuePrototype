@@ -131,23 +131,12 @@ export default {
           (res) => {
             console.log("메뉴 데이터 받음");
             let menuData = JSON.parse(res.body);
-            let userNickname = menuData["username"];
-            let userMenu = menuData["menus"];
-            this.roomDetail.userMenus[userNickname] = userMenu;
+            // let userNickname = menuData["username"];
+            // let userMenu = menuData["menus"];
+            // this.roomDetail.userMenus[userNickname] = userMenu;
+            this.roomDetail = menuData;
           }
         );
-
-      // console.log("방 입장 시, roomexit 구독 함수 호출");
-      // this.$store.state.stompSocket.subscribe(
-      //   "/room/exit",
-      //   (res) => {
-      //     console.log("메뉴 데이터 받음");
-      //     let menuData = JSON.parse(res.body);
-      //     let userNickname = menuData["username"];
-      //     let userMenu = menuData["menus"];
-      //     this.roomDetail.userMenus[userNickname] = userMenu;
-      //   }
-      // );
     },
     setDetailRoomInfo(roomInfo) {
       console.log("방 세부정보 가져오기", roomInfo);
@@ -157,7 +146,19 @@ export default {
     // 방 모달창이 꺼졌을 때, 실행되는 함수
     exitRoom() {
       console.log("exitRoom");
-      // 소캣 subscribe한거 끊기 코드 추가해두기
+      // 방에 나가면 해당 방의 메뉴에 내 메뉴를 제외시킴
+      axios
+        .post(this.HOST + "/room/exit", {
+          param: this.$store.state.userData.userNickname,
+        })
+        .then((res) => {
+          cosnole.log(res);
+        })
+        .catch((err) => {
+          cosnole.log(err);
+        });
+
+      // 소캣 subscribe한거 끊기 (connect를 끊는게 아님)
       this.$store.state.subscribeList.room.unsubscribe();
       this.$store.state.subscribeList.chat.unsubscribe();
     },
