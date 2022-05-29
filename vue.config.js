@@ -3,7 +3,7 @@ module.exports = {
   // outputDir:
   //   // "C://Users//phdlj//Desktop//GraduationWork//src//main//resources//templates",
   devServer: {
-    port: 8081,
+    port: 8080,
     // proxy: {
     //   "/": {
     //     target: "http://localhost:8080",

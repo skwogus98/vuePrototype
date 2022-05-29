@@ -16,6 +16,12 @@ export default {
   mounted(){
     console.log("mounted 실행")
     let token = this.$route.query.pg_token
+    let process = this.$route.query.process
+    if(process === "cancel" || process === "fail"){
+      alert("결제가 취소됨")
+      return;
+    }
+    
     if(token != null){
       console.log(token)
       axios.post(this.HOST + "/kakaoPaySuccess", token).then(res=>{
