@@ -1,5 +1,11 @@
 <template>
-  <b-modal id="roomDetailModal" hide-footer size="xl" :title="roomDetail.title">
+  <b-modal
+    id="roomDetailModal"
+    hide-footer
+    size="xl"
+    :title="roomDetail.title"
+    @hidden="exitRoom"
+  >
     <div class="roomDetailLeft">
       <div class="RoomDetailPlace">
         <h3 style="margin-bottom: 30px">{{ roomDetail.gatheringPlace }}</h3>
@@ -158,6 +164,9 @@ export default {
       this.roomDetail = roomInfo;
       // console.log("유저 메뉴", this.roomDetail.userMenus)
     },
+  },
+  exitRoom() {
+    console.log("exitRoom");
   },
 };
 </script>
