@@ -6,7 +6,7 @@
     <b-collapse id="locationOption">
       <b-form-select v-model="state" :options="stateData"></b-form-select>
       <b-form-select v-model="city" :options="cityData"></b-form-select>
-      <b-form-select v-model="village" :options="villageData"></b-form-select>
+      <b-form-select v-model="full_addr" :options="villageData"></b-form-select>
     </b-collapse>
   </div>
   <div :key="key" v-for="(room, key) in roomData">
@@ -74,7 +74,7 @@ export default {
       ],
       state:null,
       city:null,
-      village:null
+      full_addr:null
     };
   },
   methods: {
@@ -202,7 +202,7 @@ export default {
     city:function(val){
       this.getVillageData(val)
     },
-    village:function(val){
+    full_addr:function(val){
       console.log(val)
     }
   }
