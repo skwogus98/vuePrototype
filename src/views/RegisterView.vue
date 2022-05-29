@@ -119,10 +119,10 @@ export default {
   data() {
     return {
       registerData: {
-        email: "phdljr@naver.com",
-        nickname: "효자이씨",
-        password: "123",
-        phoneNum: "010-4725-5788",
+        email: "",
+        nickname: "",
+        password: "",
+        phoneNum: "",
       },
       passwordCheck: "",
       phoneCheck: "",

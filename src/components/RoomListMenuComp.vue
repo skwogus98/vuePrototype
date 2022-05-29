@@ -24,9 +24,7 @@
 <script>
 export default {
   name: "RoomListMenuComp",
-  props: {
-    popupVal: {} 
-  },
+  // props: ["clientSocket"],
   data() {
     return {
       selectMenu:[{
@@ -53,6 +51,7 @@ export default {
     },
     requestMenu(){
       console.log(this.selectMenu)
+      // console.log("requestMenu", this.clientSocket)
       /*
       axios
       */

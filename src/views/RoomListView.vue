@@ -30,7 +30,7 @@
     </table>
   </div>
   <b-button @click="getRoomList" v-if="showMoreBtn">더보기</b-button>
-  <room-list-detail-comp :roomId="roomId"/>
+  <room-list-detail-comp :roomId="roomId" ref="detailRoom"/>
   <b-modal id="MapModal" hide-footer title="위치">
     <kakao-map-comp-vue ref="createMap"></kakao-map-comp-vue>
   </b-modal>
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       roomData: roomList,
-      roomId: 1,
+      roomId: null,
       roomLimit: 0,
       showMoreBtn: true,
       searchText:""
@@ -61,8 +61,24 @@ export default {
   },
   methods: {
     enterRoom(room) {
-      this.$bvModal.show('roomDetailModal')
-      this.roomId = Number(room.id)
+      //////////////
+      axios.post(this.HOST+"/joinRoom", 
+        {
+          username: this.$store.state.userData.userNickname,
+          roomTitle: room.title
+        })
+        .then(res=>{
+          console.log("joinRoom 응답", res)
+          this.$refs.detailRoom.setDetailRoomInfo(res.data)
+          this.$bvModal.show('roomDetailModal')
+          this.roomId = Number(res.data.roomId)
+          this.$store.commit('enterRoom', this.roomId)
+          // console.log("방 입장", this.$store.state.userData.enterRoomId)
+          this.$refs.detailRoom.subscribeRoom()
+        }).catch(err=>{
+          console.log(err)
+        })
+      //////////////
       //console.log(this.roomId)
     },
     openMapModal(addr){
@@ -73,6 +89,7 @@ export default {
       this.roomLimit += 5
       axios.get(this.HOST+"/room/" + this.roomLimit).then(res=>{
         this.roomData = res.data
+        // console.log(res.data)
         // console.log("roomLimit: " + this.roomLimit + ", length: " + res.data.length)
         if(this.roomLimit > res.data.length){
           this.showMoreBtn = false
@@ -121,17 +138,17 @@ table{
 }
 .searchBox{
   width: 100%;
-  height: 6em;
+  height: 5em;
   margin-bottom: 3em;
 }
 .searchBox input{
-  width: calc(100% - 200px);
+  width: calc(100% - 120px);
   height: 100%;
   font-size: 2em;
   float: left;
 }
 .searchBox button{
-  width: 200px;
+  width: 120px;
   height: 100%;
   font-size: 2em;
   float: left;

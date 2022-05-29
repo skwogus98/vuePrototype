@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import Stomp from "webstomp-client";
+import SockJS from "sockjs-client";
 import AppSidebarComp from "./components/AppSidebarComp.vue";
 
 export default {
@@ -22,7 +24,7 @@ export default {
   },
   data() {
     return {
-      sidebarOn : true
+      sidebarOn : true,
     }
   },
   methods: {
@@ -35,10 +37,27 @@ export default {
         chargedCash: null
         })
     },
+    connectSocket(){
+      // console.log("소켓 연결 시도11")
+      // console.log(this.HOST+"/connect")
+      // let sock = new SockJS(this.HOST+"/connect");
+      let sock = new SockJS("http://202.31.200.215:8080/connect");
+      this.$store.commit('connectSocket', Stomp.over(sock))
+      this.$store.state.stompSocket.connect(
+        {},
+        (frame) => {
+          console.log("소캣 연결 완료, " + frame);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   },
-  /* mounted(){
+  created(){
     this.testData()
-  }, */
+    this.connectSocket()
+  }, 
 }
 </script>
 
