@@ -141,7 +141,7 @@ export default {
       this.$bvModal.show("chatModal");
     },
     subscribeRoom() {
-      console.log("방 입장 시, 구독 함수 호출");
+      console.log("방 입장 시, chat 구독 함수 호출");
       this.$store.state.stompSocket.subscribe(
         "/chat/receive/" + this.roomDetail.roomId,
         (res) => {
@@ -152,6 +152,8 @@ export default {
           this.$refs.chatModal.receivedcMsg(message);
         }
       );
+
+      console.log("방 입장 시, room 구독 함수 호출");
       this.$store.state.stompSocket.subscribe(
         "/room/" + this.roomDetail.roomId,
         (res) => {
@@ -169,6 +171,9 @@ export default {
     exitRoom() {
       console.log("exitRoom");
       // 소캣 subscribe한거 끊기 코드 추가해두기
+      /*
+      
+      */
     },
   },
 };
