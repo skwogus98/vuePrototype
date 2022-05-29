@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="chatModal" title="채팅" scrollable>
+  <b-modal id="chatModal" @hidden="exitRoom" title="채팅" scrollable>
     <div class="ChatLog">
       <div :key="key" v-for="(chat, key) in receivedChatData" :class="chat.sender == $store.state.userData.userNickname ? 'MychatBox' : 'OpponentchatBox' ">
         <div v-if="chat.sender != $store.state.userData.userNickname">
@@ -74,6 +74,9 @@ export default {
         this.sendMsg();
       }
     },
+    exitRoom(){
+      console.log("exitRoom")
+    }
   },
   mounted() {
     const footerHtml =
