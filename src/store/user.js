@@ -5,6 +5,10 @@ export const store = new Vuex.Store({
   state: {
     login: false,
     stompSocket: null,
+    subscribeList: {
+      room: null,
+      chat: null,
+    },
     userData: {
       userNickname: null,
       userEmail: null,

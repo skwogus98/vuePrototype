@@ -93,7 +93,9 @@ export default {
         minimumOrderAmount: 0,
         currAmount: 0,
         createdBy: "",
-        userMenus: {},
+        userMenus: {
+          //김민수: {menuName: 'AA', price: 5000, quantity: 2}
+        },
       },
     };
   },
@@ -110,28 +112,42 @@ export default {
     },
     subscribeRoom() {
       console.log("방 입장 시, chat 구독 함수 호출");
-      this.$store.state.stompSocket.subscribe(
-        "/chat/receive/" + this.roomDetail.roomId,
-        (res) => {
-          // 서버로부터 채팅 내용을 res에 담아서 받아옴
-          // console.log(res)
-          let message = JSON.parse(res.body);
-          // if(message.sender !== this.$store.state.userData.userNickname)
-          this.$refs.chatModal.receivedcMsg(message);
-        }
-      );
+      this.$store.state.subscribeList.chat =
+        this.$store.state.stompSocket.subscribe(
+          "/chat/receive/" + this.roomDetail.roomId,
+          (res) => {
+            // 서버로부터 채팅 내용을 res에 담아서 받아옴
+            // console.log(res)
+            let message = JSON.parse(res.body);
+            // if(message.sender !== this.$store.state.userData.userNickname)
+            this.$refs.chatModal.receivedcMsg(message);
+          }
+        );
 
       console.log("방 입장 시, room 구독 함수 호출");
-      this.$store.state.stompSocket.subscribe(
-        "/room/" + this.roomDetail.roomId,
-        (res) => {
-          console.log("메뉴 데이터 받음");
-          let menuData = JSON.parse(res.body);
-          let userNickname = menuData["username"];
-          let userMenu = menuData["menus"];
-          this.roomDetail.userMenus[userNickname] = userMenu;
-        }
-      );
+      this.$store.state.subscribeList.room =
+        this.$store.state.stompSocket.subscribe(
+          "/room/" + this.roomDetail.roomId,
+          (res) => {
+            console.log("메뉴 데이터 받음");
+            let menuData = JSON.parse(res.body);
+            let userNickname = menuData["username"];
+            let userMenu = menuData["menus"];
+            this.roomDetail.userMenus[userNickname] = userMenu;
+          }
+        );
+
+      // console.log("방 입장 시, roomexit 구독 함수 호출");
+      // this.$store.state.stompSocket.subscribe(
+      //   "/room/exit",
+      //   (res) => {
+      //     console.log("메뉴 데이터 받음");
+      //     let menuData = JSON.parse(res.body);
+      //     let userNickname = menuData["username"];
+      //     let userMenu = menuData["menus"];
+      //     this.roomDetail.userMenus[userNickname] = userMenu;
+      //   }
+      // );
     },
     setDetailRoomInfo(roomInfo) {
       console.log("방 세부정보 가져오기", roomInfo);
@@ -142,9 +158,8 @@ export default {
     exitRoom() {
       console.log("exitRoom");
       // 소캣 subscribe한거 끊기 코드 추가해두기
-      /*
-
-      */
+      this.$store.state.subscribeList.room.unsubscribe();
+      this.$store.state.subscribeList.chat.unsubscribe();
     },
   },
 };

@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "RoomListMenuComp",
   // props: ["clientSocket"],
@@ -76,7 +77,7 @@ export default {
       this.selectMenu.push({
         menuName: null,
         price: null,
-        menuCount: null,
+        quantity: null,
       });
       console.log(this.selectMenu);
     },
@@ -86,10 +87,24 @@ export default {
     },
     requestMenu() {
       console.log(this.selectMenu);
-      // console.log("requestMenu", this.clientSocket)
       /*
       axios
       */
+      axios
+        .post(this.HOST + "/menu", {
+          username: this.$store.state.userData.userNickname,
+          roomId: this.$store.state.userData.enterRoomId,
+          menus: this.selectMenu,
+        })
+        .then((res) => {
+          res;
+          console.log("메뉴 보냄");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      //
       this.$bvModal.hide("MenuModal");
     },
     setMenu(userMenu) {
