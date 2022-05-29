@@ -8,7 +8,7 @@
         <b-list-group-item class="MenuDetail" variant="light" :key="key" v-for="(menu, key) in selectMenu">
           <b-form-input type="text" id="MenuInput" placeholder="메뉴 이름" v-model="selectMenu[key]['menuName']"></b-form-input>
           <b-form-input type="number" id="menuPrice" placeholder="가격" v-model="selectMenu[key]['price']"></b-form-input>
-          <b-form-input type="number" id="menuCount" placeholder="개수" v-model="selectMenu[key]['menuCount']"></b-form-input>
+          <b-form-input type="number" id="menuCount" placeholder="개수" v-model="selectMenu[key]['quantity']"></b-form-input>
           <b-button class="DelMenu" variant="danger" @click="delMenu(key)">X</b-button>
         </b-list-group-item>
         <b-list-group-item variant="light">
@@ -22,15 +22,16 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "RoomListMenuComp",
   // props: ["clientSocket"],
   data() {
     return {
       selectMenu:[{
-          "menuName":null,
-          "price":null,
-          "menuCount":null
+          menuName:null,
+          price:null,
+          quantity:null
         }
       ],
     }
@@ -41,7 +42,7 @@ export default {
       this.selectMenu.push({
           "menuName":null,
           "price":null,
-          "menuCount":null
+          "quantity":null
         })
       console.log(this.selectMenu)
     },
@@ -55,10 +56,22 @@ export default {
       /*
       axios
       */
+      axios.post(this.HOST+"/menu", {
+        username: this.$store.state.userData.userNickname,
+        roomId: this.$store.state.userData.enterRoomId,
+        menus: this.selectMenu
+      }).then(res=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+
       this.$bvModal.hide("MenuModal")
     },
     setMenu(userMenu){
+      console.log("유저 메뉴2", userMenu)
       if(userMenu.length!=0){
+        console.log("유저 메뉴3", userMenu)
         this.selectMenu = null
         this.selectMenu = userMenu
       }

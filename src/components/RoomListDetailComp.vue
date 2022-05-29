@@ -53,21 +53,21 @@
     <div class="orderButton">
       <b-button @click="order()">주문하기</b-button>
     </div>
-    <room-list-menu-comp-vue ref="menuModal"></room-list-menu-comp-vue>
+    <room-list-menu-comp ref="menuModal"/>
     <room-list-chat-comp ref="chatModal"/>
   </b-modal>
 </template>
 
 <script>
 // import roomDetail from "../json/roomDetail.json";
-import RoomListMenuCompVue from "./RoomListMenuComp.vue";
+import RoomListMenuComp from "./RoomListMenuComp.vue";
 import RoomListChatComp from "./RoomListChatComp.vue"
 
 export default {
   name: "RoomListDetailComp",
   props: ["roomId"],
   components: {
-    RoomListMenuCompVue,
+    RoomListMenuComp,
     RoomListChatComp
   },
   data() {
@@ -82,45 +82,46 @@ export default {
         minimumOrderAmount: 0,
         currAmount: 0,
         createdBy: "",
+        userMenus: [],
         // userState:[]
-      }
-      // selectedMenu: [
-        // {
-        //   userName: "나재현",
-        //   menu: [
-        //     {
-        //       menuName: "아메리카노",
-        //       price: 2000,
-        //       quantity: 2,
-        //     },
-        //     {
-        //       menuName: "크로플",
-        //       price: 3500,
-        //       quantity: 3,
-        //     },
-        //   ],
-        // },
-        // {
-        //   userName: "이종렬",
-        //   menu: [
-        //     {
-        //       menuName: "아이스티",
-        //       price: 1500,
-        //       menuCount: 1,
-        //     },
-        //     {
-        //       menuName: "청포도 에이드",
-        //       price: 2500,
-        //       menuCount: 2,
-        //     },
-        //     {
-        //       menuName: "딸기 케이크",
-        //       price: 6000,
-        //       menuCount: 4,
-        //     },
-        //   ],
-        // },
-      // ],
+      },
+      selectedMenu: [
+        {
+          userName: "나재현",
+          menus: [
+            {
+              menuName: "아메리카노",
+              price: 2000,
+              quantity: 2,
+            },
+            {
+              menuName: "크로플",
+              price: 3500,
+              quantity: 3,
+            },
+          ],
+        },
+        {
+          userName: "이종렬",
+          menu: [
+            {
+              menuName: "아이스티",
+              price: 1500,
+              menuCount: 1,
+            },
+            {
+              menuName: "청포도 에이드",
+              price: 2500,
+              menuCount: 2,
+            },
+            {
+              menuName: "딸기 케이크",
+              price: 6000,
+              menuCount: 4,
+            },
+          ],
+        },
+      ],
     };
   },
   methods: {
@@ -128,6 +129,9 @@ export default {
       alert(this.roomId);
     },
     openMenu(userMenu) {
+      // console.log("내 메뉴", this.roomDetail.userMenus[this.$store.state.userData.userNickname])
+      console.log("유저 메뉴", userMenu)
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////문제
       this.$refs.menuModal.setMenu(userMenu);
       this.$bvModal.show("MenuModal");
     },
