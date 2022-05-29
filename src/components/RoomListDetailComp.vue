@@ -16,7 +16,7 @@
           <b-list-group-item
             variant="light"
             :key="nickname"
-            v-for="(menu, nickname) in roomDetail.userMenus"
+            v-for="(menus, nickname) in roomDetail.userMenus"
           >
             <!-- asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
             <p>{{ nickname }}</p>
@@ -24,7 +24,7 @@
               class="MenuDetail"
               variant="info"
               :key="menuNum"
-              v-for="(menu, menuNum) in menu"
+              v-for="(menu, menuNum) in menus"
             >
               {{ menu["menuName"] }} : {{ menu["price"] }}원
               <b-badge variant="success" pill>{{ menu["quantity"] }}</b-badge>
@@ -88,6 +88,7 @@ export default {
         minimumOrderAmount: 0,
         currAmount: 0,
         createdBy: "",
+        userMenus:{}
         // userState:[]
       },
       // selectedMenu: [
@@ -164,9 +165,9 @@ export default {
       this.roomDetail = roomInfo;
       // console.log("유저 메뉴", this.roomDetail.userMenus)
     },
-  },
-  exitRoom() {
-    console.log("exitRoom");
+    exitRoom() {
+      console.log("exitRoom");
+    },
   },
 };
 </script>
