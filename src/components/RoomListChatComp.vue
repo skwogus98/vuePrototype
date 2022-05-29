@@ -92,7 +92,7 @@ export default {
 
 <style>
 .ChatLog {
-  max-height: 100%;
+  height: 60vh;
 }
 .OpponentchatBox {
   text-align: left;
