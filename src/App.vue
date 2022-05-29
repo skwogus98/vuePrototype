@@ -41,7 +41,7 @@ export default {
       // console.log("소켓 연결 시도11")
       // console.log(this.HOST+"/connect")
       // let sock = new SockJS(this.HOST+"/connect");
-      let sock = new SockJS("http://202.31.200.215:8080/connect");
+      let sock = new SockJS("http://117.20.209.64:8080/connect");
       this.$store.commit('connectSocket', Stomp.over(sock))
       this.$store.state.stompSocket.connect(
         {},
