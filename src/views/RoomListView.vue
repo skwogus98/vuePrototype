@@ -1,105 +1,111 @@
 <template>
   <div class="searchBox">
-    <b-form-input v-model="searchText"/>
+    <b-form-input v-model="searchText" />
     <b-button variant="success">검색</b-button>
   </div>
   <div :key="key" v-for="(room, key) in roomData">
     <table class="roomListTable">
-    <td @click="enterRoom(room)">
-      <room-list-room-comp>
-        <!-- <template #roomTitle> {{ room.title }}</template>
+      <td @click="enterRoom(room)">
+        <room-list-room-comp>
+          <!-- <template #roomTitle> {{ room.title }}</template>
         <template #numPeople>
           {{ room.currentPerson }}/{{ room.maxPerson }}
         </template>
         <template #location> {{ room.location }} </template>
         <template #price> {{ room.fundedPrice }}/{{ room.price }} </template> -->
-        <!-- =======================테스트====================== -->
-        <template #roomTitle> {{ room.title }}</template>
-        <template #numPeople>
-          {{ room.currNumOfPeople }}/{{ room.maximumPeople }}
-        </template>
-        <template #location> {{ room.gatheringPlace }} </template>
-        <template #price> {{ room.currentAmount }}/{{ room.minimumOrderAmount }} </template>
-      </room-list-room-comp>
-    </td>
-    <td id="showMapTd">
-      <b-button variant="outline-info" @click="openMapModal('제주특별자치도 제주시 첨단로 242')"><!-- room.location 사용해야함 -->
-        🗺️
-      </b-button>
-    </td>
+          <!-- =======================테스트====================== -->
+          <template #roomTitle> {{ room.title }}</template>
+          <template #numPeople>
+            {{ room.currNumOfPeople }}/{{ room.maximumPeople }}
+          </template>
+          <template #location> {{ room.gatheringPlace }} </template>
+          <template #price>
+            {{ room.currentAmount }}/{{ room.minimumOrderAmount }}
+          </template>
+        </room-list-room-comp>
+      </td>
+      <td id="showMapTd">
+        <b-button
+          variant="outline-info"
+          @click="openMapModal('제주특별자치도 제주시 첨단로 242')"
+          ><!-- room.location 사용해야함 -->
+          🗺️
+        </b-button>
+      </td>
     </table>
   </div>
   <b-button @click="getRoomList" v-if="showMoreBtn">더보기</b-button>
-  <room-list-detail-comp :roomId="roomId" ref="detailRoom"/>
+  <room-list-detail-comp :roomId="roomId" ref="detailRoom" />
   <b-modal id="MapModal" hide-footer title="위치">
     <kakao-map-comp-vue ref="createMap"></kakao-map-comp-vue>
   </b-modal>
 </template>
 
 <script>
-import RoomListDetailComp from '../components/RoomListDetailComp.vue';
+import RoomListDetailComp from "../components/RoomListDetailComp.vue";
 import RoomListRoomComp from "../components/RoomListRoomComp.vue";
-import KakaoMapCompVue from '../components/KakaoMapComp.vue';
-import roomList from "../json/roomList.json";
-import axios from 'axios';
+import KakaoMapCompVue from "../components/KakaoMapComp.vue";
+// import roomList from "../json/roomList.json";
+import axios from "axios";
 
 export default {
   name: "RoomListView",
   components: {
     RoomListRoomComp,
     RoomListDetailComp,
-    KakaoMapCompVue
+    KakaoMapCompVue,
   },
   data() {
     return {
-      roomData: roomList,
+      roomData: null,
       roomId: null,
       roomLimit: 0,
       showMoreBtn: true,
-      searchText:""
+      searchText: "",
     };
   },
   methods: {
     enterRoom(room) {
       //////////////
-      axios.post(this.HOST+"/joinRoom", 
-        {
+      axios
+        .post(this.HOST + "/joinRoom", {
           username: this.$store.state.userData.userNickname,
-          roomTitle: room.title
+          roomTitle: room.title,
         })
-        .then(res=>{
-          console.log("joinRoom 응답", res)
-          this.$refs.detailRoom.setDetailRoomInfo(res.data)
-          this.$bvModal.show('roomDetailModal')
-          this.roomId = Number(res.data.roomId)
-          this.$store.commit('enterRoom', this.roomId)
+        .then((res) => {
+          console.log("joinRoom 응답", res);
+          this.$refs.detailRoom.setDetailRoomInfo(res.data);
+          this.$bvModal.show("roomDetailModal");
+          this.roomId = Number(res.data.roomId);
+          this.$store.commit("enterRoom", this.roomId);
           // console.log("방 입장", this.$store.state.userData.enterRoomId)
-          this.$refs.detailRoom.subscribeRoom()
-        }).catch(err=>{
-          console.log(err)
+          this.$refs.detailRoom.subscribeRoom();
         })
+        .catch((err) => {
+          console.log(err);
+        });
       //////////////
       //console.log(this.roomId)
     },
-    openMapModal(addr){
-      this.$bvModal.show('MapModal')
+    openMapModal(addr) {
+      this.$bvModal.show("MapModal");
       setTimeout(() => this.$refs.createMap.changeMap(addr), 200);
     },
-    getRoomList(){
-      this.roomLimit += 5
-      axios.get(this.HOST+"/room/" + this.roomLimit).then(res=>{
-        this.roomData = res.data
+    getRoomList() {
+      this.roomLimit += 5;
+      axios.get(this.HOST + "/room/" + this.roomLimit).then((res) => {
+        this.roomData = res.data;
         // console.log(res.data)
         // console.log("roomLimit: " + this.roomLimit + ", length: " + res.data.length)
-        if(this.roomLimit > res.data.length){
-          this.showMoreBtn = false
+        if (this.roomLimit > res.data.length) {
+          this.showMoreBtn = false;
         }
-      })
-    }
+      });
+    },
   },
-  mounted(){
-    this.getRoomList()
-  }
+  mounted() {
+    this.getRoomList();
+  },
 };
 </script>
 
@@ -108,14 +114,14 @@ td {
   padding-left: 0.8em;
   padding-right: 0.8em;
 }
-table{
+table {
   width: 100%;
   border: 0px;
 }
-.roomListTable{
+.roomListTable {
   width: 100%;
   height: 100%;
-  border: 1px solid rgb(180,180,180);
+  border: 1px solid rgb(180, 180, 180);
   border-collapse: separate;
   border-radius: 8px;
   background-color: rgb(245, 245, 245);
@@ -123,12 +129,12 @@ table{
   padding-bottom: 1.1em;
   vertical-align: middle;
 }
-#showMapTd{
+#showMapTd {
   border-left: 1px solid #444444;
   width: 15%;
   padding: 10px;
 }
-#showMapTd button{
+#showMapTd button {
   height: 100%;
   width: 2em;
   font-size: 4em;
@@ -136,18 +142,18 @@ table{
 .roomListTable {
   margin-bottom: 1em;
 }
-.searchBox{
+.searchBox {
   width: 100%;
   height: 5em;
   margin-bottom: 3em;
 }
-.searchBox input{
+.searchBox input {
   width: calc(100% - 120px);
   height: 100%;
   font-size: 2em;
   float: left;
 }
-.searchBox button{
+.searchBox button {
   width: 120px;
   height: 100%;
   font-size: 2em;

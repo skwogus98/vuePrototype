@@ -1,12 +1,27 @@
 <template>
   <b-modal id="chatModal" title="채팅" scrollable>
     <div class="ChatLog">
-      <div :key="key" v-for="(chat, key) in roomData" :class="chat.sender == $store.state.userData.userNickname ? 'MychatBox' : 'OpponentchatBox' ">
+      <h3>{{ receivedChatData }}</h3>
+      <div
+        :key="key"
+        v-for="(chat, key) in roomData"
+        :class="
+          chat.sender == $store.state.userData.userNickname
+            ? 'MychatBox'
+            : 'OpponentchatBox'
+        "
+      >
         <div v-if="chat.sender != $store.state.userData.userNickname">
-          {{chat.sender}}
+          {{ chat.sender }}
         </div>
-        <div :class="chat.sender == $store.state.userData.userNickname ? 'MyChat' : 'OpponentChat' ">
-          {{chat.content}}
+        <div
+          :class="
+            chat.sender == $store.state.userData.userNickname
+              ? 'MyChat'
+              : 'OpponentChat'
+          "
+        >
+          {{ chat.content }}
         </div>
         <!-- <div class="ChatTime">
           {{chat.time}}

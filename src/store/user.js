@@ -3,12 +3,12 @@ import createPersistedState from "vuex-persistedstate";
 
 export const store = new Vuex.Store({
   state: {
-    login: true,
+    login: false,
     stompSocket: null,
     userData: {
-      userNickname: "김민수",
-      userEmail: "aa@naver.com",
-      userCash: 20000,
+      userNickname: null,
+      userEmail: null,
+      userCash: 0,
       chargedCash: 0,
       enterRoomId: null,
     },
@@ -31,15 +31,15 @@ export const store = new Vuex.Store({
       state.userData.userCash += chargedCash;
       state.userData.chargedCash = chargedCash;
     },
-    enterRoom(state, roomId){
-      state.userData.enterRoomId = roomId
+    enterRoom(state, roomId) {
+      state.userData.enterRoomId = roomId;
     },
-    exitRoom(state){
-      state.userData.enterRoomId = null
+    exitRoom(state) {
+      state.userData.enterRoomId = null;
     },
-    connectSocket(state, socket){
+    connectSocket(state, socket) {
       state.stompSocket = socket;
-    }
+    },
   },
   plugins: [createPersistedState()], //vuex 데이터 지속
 });
